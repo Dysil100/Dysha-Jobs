@@ -2,21 +2,30 @@ I - App Starten
 
         ##Workflows acces token:  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
         ##Workflows acces token 2:  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
-
+        ##ssh key-gen-myUbuntu : ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5V5vQXM0USoC84+4/dczdWPFuGaFLJMw1YF3D+2NJhb7YoOP9
+                                 Lf2c7oysoiwuzDnLvdWcIdd9JW6x4M7R9gOxsZW0iVrn7kL5zBJemXDo5MlnRE1ihSUFX0MebezqmUqYYGXJyUaO
+                                 1B3qq0awarykWNwKMhWGV+c1IeR09e9Fpw2GiKcFjpyF16UJ5k+V8k997kyMhvB5LSPaw1BUZYTnjxiHj27e75kO
+                                 GOB9Mdm7DC1msKpcYq8O/FOCH+ItDQavFMFbBliRoW5UjqOMG9RYU/7DTG5yaospVcBWVgcgdL5KAciJp79f70Gd
+                                 4s7HhSHt8bKoyiKnMzpT/jB2ifF3JdhQDtwhQ7LLCgUdVyRNV/ftLN7rM39yt8NJ3d9OVbLvsIp2p7vkOnSuM+35
+                                 t4/MPg0RP6YHBNKyZL7tb5UN8K80wOBop94VuurmjaUTpIvb4ztrkTUwvDWgN85Hw88ESK669fLYvbzQ7UVq7kF7
+                                 elyPUtUovMXM+Esy6L6CFSdF2vbRkfdgJyRD0wIcNITOfUFk+6y3f58PNC2LjklWiBKaGn7/VBxsFq1jmp3j0TS8
+                                 gK+gn0hbz4J1M7IYZIb7vWyTfLDQy8KdhaSJcr4eDwkBQOfEPqRBqY2YRCwwCbxVtvzWI3sEXpnM3cNE5R5oGjr4BG/r0tMA/g5D2PD7pQ== silatsamdylan@gmail.com
 
 
         ###############################
         Server zeug
-        ##IP-Server: 95.179.219.29
+        ##IP-Server: 64.176.195.127
         ##Gihub-servertoken: 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       //token 0
         ################################
 
     1) zum virtuallen machinen des ServerProvider Vultr  mit den Folgenden Commandos login:
-        ssh root@95.179.219.29
+        ssh root@64.176.195.127
         ##IP-Server: 95.179.219.29
         und mit following credential:
         username:root
-        password:[Js4m[B}QP#(D9XU
+        password:7!hX][8G+}.Qfya6
+        cat /root/.ssh/id_rsa.pub
+
 
     2) navigate to hom and start the jarFile with following command
         cd ../home/java-apps/WillAgropastoralApp/
