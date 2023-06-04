@@ -23,11 +23,11 @@ import static duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.D
 @AllArgsConstructor
 public class RegistrationService {
 
-    // TODO: 21.02.22 localhot to https://willagropastoral.top change for production
+    // TODO: 21.02.22 localhot to https://dysha-enterprise.com change for production
 
-    @Value("${willagropastoral.admins}")
+    @Value("${Dyshajobs.admins}")
     private final List<String> admins;
-    @Value("${willagropastoral.leaders}")
+    @Value("${Dyshajobs.leaders}")
     private final List<String> leaders;
 
     private  AppUserService appUserService;

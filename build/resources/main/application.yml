@@ -1,6 +1,6 @@
-#email: willagropastoral@gmail.com
-#password: duo.cmr.willagropastoral
-willagropastoral:
+#email: dysha237@gmail.com
+#password: Dysha@0612
+Dyshajobs:
   admins: silatsamdylan@gmail.com
   leaders: willagropastoral@gmail.com
 
@@ -10,20 +10,20 @@ spring:
   profiles:
     active: google
   datasource:
-    username: willagropastoral
+    username: Dyshajobs
     password: iamgroot
-    url: jdbc:postgresql://localhost:15000/willagropastoral
+    url: jdbc:postgresql://localhost:15000/Dyshajobs
 
   flyway:
     create-schemas: true
-    url: jdbc:postgresql://localhost:15000/willagropastoral
-    user: willagropastoral
+    url: jdbc:postgresql://localhost:15000/Dyshajobs
+    user: Dyshajobs
     password: iamgroot
 
   resources:
     chain:
       proxy:
-        host: willagropastoral
+        host: Dyshajobs
         port: 80
 
   mail:

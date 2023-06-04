@@ -72,7 +72,7 @@ public class AppUserService implements UserDetailsService {
                     returnValue = "Please confirms your email to enable your account before the link expire";
                 }
             } else {
-                returnValue = "Note: email " + appUser.getUsername() + " already have and Confirmed account by willagropastoral";
+                returnValue = "Note: email " + appUser.getUsername() + " already have and Confirmed account by Dysha-Enterprise";
             }
         } else {
             userArchivRepository.save(appUser);
