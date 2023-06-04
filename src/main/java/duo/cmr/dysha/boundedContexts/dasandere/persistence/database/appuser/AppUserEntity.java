@@ -20,15 +20,17 @@ public class AppUserEntity{
     private String firstName;
     private String lastName;
     private String email;
+    private String telephone;
     private String password;
     private AppUserRole role;
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    public AppUserEntity(String firstName, String lastName, String email, String password, AppUserRole role) {
+    public AppUserEntity(String firstName, String lastName, String email, String telephone, String password, AppUserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.telephone = telephone;
         this.password = password;
         this.role = role;
     }

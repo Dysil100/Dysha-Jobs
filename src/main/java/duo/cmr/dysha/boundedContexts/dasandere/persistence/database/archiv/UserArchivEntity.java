@@ -17,12 +17,14 @@ public class UserArchivEntity {
     private String firstName;
     private String lastName;
     private String email;
+    private String telephone;
     private String password;
 
-    public UserArchivEntity(String firstName, String lastName, String email, String password) {
+    public UserArchivEntity(String firstName, String lastName, String email, String telephone, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.telephone = telephone;
         this.password = password;
     }
 }

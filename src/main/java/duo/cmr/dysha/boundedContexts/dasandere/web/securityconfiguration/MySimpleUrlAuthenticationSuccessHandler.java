@@ -66,7 +66,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     }
 
     private String determineDyshaTargetUrl(Authentication authentication) {
-        Map<String, String> roleTargetUrlMap = new HashMap<>(Map.of("ROLE_ADMIN", "/adminindex","ROLE_USER",
+        Map<String, String> roleTargetUrlMap = new HashMap<>(Map.of("ROLE_ADMIN", "/dyshajobs","ROLE_USER",
                 "/dyshajobs","ROLE_LEADER", "/dyshajobs")); // Better save the more valuable Authorities
         // so that the highe authority for a user may be found first
 

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Mon Profil</title>
+  <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
   <link rel="stylesheet" th:href="@{/css/dyshaprofil.css}" type="text/css" href="../static/css/dyshaprofil.css"/>
   <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../static/css/jobindex.css"/>
   <style th:inline="text">
@@ -31,6 +32,10 @@
     <tr>
       <th>Email</th>
       <td th:text="${globalUser.user.email}"></td>
+    </tr>
+    <tr>
+      <th>Bio</th>
+      <td th:text="${globalUser.worker.description}"></td>
     </tr>
     <tr>
       <th>Mot de passe</th>

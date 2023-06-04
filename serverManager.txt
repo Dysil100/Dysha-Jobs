@@ -82,7 +82,7 @@ IV- Anbieter:
 
   6) Google account:
         username: Silatsamdylan@gmail.com
-        password: programmierung2.0
+        password: newBeginnn2.0
 
         username: willagropastoral@gmail.com
         password: feuille de calculs

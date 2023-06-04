@@ -39,7 +39,7 @@ public class AppUserService implements UserDetailsService {
             throws UsernameNotFoundException {
         //throw new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email));
         return appUserRepository.findByEmail(email).orElseGet(() -> new AppUser(
-                "Not found", "Not found", "Not found", "Not found",
+                "Not found", "Not found", "Not found", "Not found", "Not found",
                 ROLE_USER));
     }
 
@@ -168,7 +168,7 @@ public class AppUserService implements UserDetailsService {
     }
 
     public AppUser findByEmail(String email) {
-        return appUserRepository.findByEmail(email).orElseGet(() -> new AppUser(
+        return appUserRepository.findByEmail(email).orElseGet(() -> new AppUser("",
                 "", "", email, "",
                 ROLE_USER));
     }

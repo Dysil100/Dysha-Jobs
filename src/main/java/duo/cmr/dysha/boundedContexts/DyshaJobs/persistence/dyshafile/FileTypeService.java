@@ -11,7 +11,7 @@ import java.util.zip.DeflaterOutputStream;
 public class FileTypeService {
     public FileTypeService() {
     }
-    private  final Map<String, String> tableTypes = new HashMap<>(Map.of("CV_document", "pdf", "Contrat_document", "pdf", "Last_Diplome_document", "pdf","ID_Card_document",  "image", "Job_photo_image", "image", "Profil_photo_image", "image"));
+    private  final Map<String, String> tableTypes = new HashMap<>(Map.of("CV_document", "pdf", "Contrat_document", "pdf", "Last_Diplome_document", "pdf","ID_Card_document",  "image", "Job_photo_image", "image", "Profil_photo_image", "image", "DyshaJobs_Logo", "image"));
     public  String defineFiletypeByTybleName(String tablename) {
         return tableTypes.getOrDefault(tablename, "Unknown: Table not found");
     }

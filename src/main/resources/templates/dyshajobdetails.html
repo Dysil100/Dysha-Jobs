@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Détails du Job</title>
+  <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
   <link rel="stylesheet" th:href="@{/css/dyshajobdetails.css}" type="text/css" href="../static/css/dyshajobdetails.css"/>
   <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../static/css/jobindex.css"/>
 </head>
@@ -18,7 +19,7 @@
     <div th:if="${globalUser.isAdmin()}">
       <div th:if="${job.hasNoImage()}" class="jobs"> <a th:href="@{/dyshajobs/files/{tablename}/{entityid}/{fileType} (tablename=${job.tableName()}, entityid=${job.id}, fileType='image')}">Yo boss Stp Ajouter une Image pour ce Job</a></div>
       <div th:if="${globalUser.dyshaUserExist()}">
-        <div th:if="${!globalUser.hasValidationForJob(job.getId()) && globalUser.alreadyPostlutlateFor(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesDyshaJobs}" class="btn btn-primary">Vous serrez contacté via Mail par l'annonceur a propos de ce DyshaJob</a></div>
+        <div th:if="${!globalUser.hasValidationForJob(job.getId()) && globalUser.alreadyPostlutlateFor(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesDyshaJobs}" class="btn btn-primary">Vous serrez contacté via Whatsapp ou Mail par l'annonceur a propos de ce Job en cas de validation</a></div>
         <div th:if="${globalUser.alreadyPostlutlateFor(job.getId()) && globalUser.hasValidationForJob(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesdocuments}" class="btn btn-primary">Vous pouvez Visualiser votre Contrat de travail.</a></div>
         <div th:if="${!globalUser.alreadyPostlutlateFor(job.getId()) && validations.loadedDocuments}" class="postuler" > <a th:href="@{/dyshajobs/postuler/{jobId}(jobId=${job.id})}" class="btn btn-primary">Postuler</a></div>
         <div th:if="${!validations.isLoadedCurriculumVitae()}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename}/{entityid}/{filesType} (tablename='CV_document', entityid=${globalUser.worker.id}, filesType='pdf')}" class="btn btn-primary">Ajouter un pdf de votre Curriculum Vitae</a></div>

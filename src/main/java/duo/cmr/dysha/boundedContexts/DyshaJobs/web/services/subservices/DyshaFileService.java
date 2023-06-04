@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Service
@@ -54,5 +55,13 @@ public class DyshaFileService {
 
     public String determineFileType(byte[] filesDataBytes) {
         return fileTypeService.determineFileType(filesDataBytes);
+    }
+
+    public String getAcceptedType(String tablename) {
+      return Objects.equals(fileTypeService.defineFiletypeByTybleName(tablename), "image") ? "image/*" : ".pdf";
+    }
+
+    public DyshaFile findByUniqueName(String uniqueName) {
+        return dyshaFileRepository.findByUniqueName(uniqueName);
     }
 }

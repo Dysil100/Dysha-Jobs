@@ -14,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Repository
 public class DyshaFileRepositoryImpl implements DyshaFileRepository {
-    DaoDyshaFileRepository daoDyshaFileRepository;
+    private DaoDyshaFileRepository daoDyshaFileRepository;
     @Override
     public void save(DyshaFile dyshaFile) {
      daoDyshaFileRepository.save(toDyshaFileEntity(dyshaFile));
@@ -50,6 +50,11 @@ public class DyshaFileRepositoryImpl implements DyshaFileRepository {
     @Override
     public List<DyshaFile> findAllByEntityId(Long entityId) {
         return toDyshaFileList(daoDyshaFileRepository.findAllByEntityId(entityId));
+    }
+
+    @Override
+    public DyshaFile findByUniqueName(String uniqueName) {
+        return daoDyshaFileRepository.existsByTableName("DyshaJobs_Logo") ? toDyshaFileList(daoDyshaFileRepository.findAllByTableName("DyshaJobs_Logo")).stream().toList().get(0) : null;
     }
 
     @Override

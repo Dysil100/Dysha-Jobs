@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+<link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
 <link rel="stylesheet" th:href="@{/css/login.css}" type="text/css" href="../static/css/login.css"/>
 <body>
 <div class="container" th:if="${login}">
@@ -55,6 +56,10 @@
         <div class="input-group">
             <input th:field="*{email}" type="email" id="email"  name="email" required>
             <label for="email">E-mail</label>
+        </div>
+        <div class="input-group">
+            <input th:field="*{telephone}" type="tel" id="telephone" name="telephone" pattern="[0-9]{9}" required>
+            <label for="telephone">Telephone - WhatsApp</label>
         </div>
         <div class="input-group">
             <input th:field="*{password}" type="password" id="password"  name="password" required>

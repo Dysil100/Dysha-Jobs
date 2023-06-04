@@ -71,13 +71,13 @@ public class AppUserRepositoryImpl implements AppUserRepository {
     }
 
     public AppUser toAppUser(AppUserEntity entity) {
-        AppUser appUser = new AppUser(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPassword(), entity.getRole());
+        AppUser appUser = new AppUser(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getTelephone(), entity.getPassword(), entity.getRole());
         appUser.setEnabled(entity.getEnabled());
         appUser.setLocked(entity.getLocked());
         return appUser;
     }
 
     public AppUserEntity toEntity(AppUser user) {
-        return new AppUserEntity(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getRole());
+        return new AppUserEntity(user.getFirstName(), user.getLastName(), user.getUsername(), user.getTelephone(), user.getPassword(), user.getRole());
     }
 }

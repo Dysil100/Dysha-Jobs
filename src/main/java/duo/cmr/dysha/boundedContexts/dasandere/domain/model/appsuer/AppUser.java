@@ -19,24 +19,27 @@ public class AppUser  implements UserDetails  {
     private String firstName;
     private String lastName;
     private String email;
+    private String telephone;
     private String password;
     private AppUserRole role;
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    public AppUser(String firstName, String lastName, String email, String password, AppUserRole role) {
+    public AppUser(String firstName, String lastName, String email, String telephone, String password, AppUserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.telephone = telephone;
         this.password = password;
         this.role = role;
     }
 
-    public AppUser(Long id, String firstName, String lastName, String email, String password, AppUserRole role) {
+    public AppUser(Long id, String firstName, String lastName, String email, String telephone, String password, AppUserRole role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.telephone = telephone;
         this.password = password;
         this.role = role;
     }

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ajouter un Fichier</title>
+    <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
     <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../static/css/jobindex.css"/>
     <link rel="stylesheet" th:href="@{/css/addpfiles.css}" type="text/css" href="../static/css/addpfiles.css"/>
     <script>
@@ -43,11 +44,11 @@
                 <input hidden th:value="${dyshaFile.fileType}"  type="text" id="fileType" name="fileType"/>
             </div>
 
-        <div th:if="${#fields.hasErrors('fileType')}" th:errors="*{fileType}" class="alert alert-danger"></div>
+        <div  th:if="${#fields.hasErrors('fileType')}" th:errors="*{fileType}" class="alert alert-danger"></div>
         <div id="error-message" class="alert alert-danger error-message" style="display: none;">Le fichier sélectionné dépasse la taille maximale autorisée. Veuillez compresser votre image</div>
         <!-- Choisir la photo -->
         <label for="file">Chosse the File to upload</label>
-        <input type="file" id="file" name="file"/>
+        <input th:accept="${filesTypeInput}"  type="file" id="file" name="file"/>
 
         <!-- Bouton Soumettre -->
         <input type="submit" value="Submit"/>

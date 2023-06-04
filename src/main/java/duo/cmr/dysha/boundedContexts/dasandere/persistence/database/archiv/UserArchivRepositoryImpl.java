@@ -30,11 +30,12 @@ public class UserArchivRepositoryImpl implements UserArchivRepository {
     @Override
     public void updatePasswordByEmail(String password, String email) {
         UserArchivEntity userArchivEntity = daoUserArchivRepository.findByEmail(email).orElse(null);
+        assert userArchivEntity != null;
         userArchivEntity.setPassword(password);
         daoUserArchivRepository.save(userArchivEntity);
     }
 
     private UserArchivEntity toUserArchivEntity(AppUser user) {
-        return new UserArchivEntity(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        return new UserArchivEntity(user.getFirstName(), user.getLastName(), user.getEmail(), user.getTelephone(), user.getPassword());
     }
 }

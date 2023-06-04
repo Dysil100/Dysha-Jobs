@@ -8,6 +8,8 @@ import duo.cmr.dysha.boundedContexts.DyshaJobs.web.services.subservices.DyshaFil
 import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUser;
 import duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +40,7 @@ public class DyshaFilesController {
     public String addFilesUser(@PathVariable String tablename, @ModelAttribute("user") AppUser user, Model model) {
         DyshaWorker workerByUserId = dyshaWorkerService.findByUserId(user.getId());
         model.addAttribute("dyshaFile", new DyshaFile(user.getId(), workerByUserId.getId(), tablename, dyshaFileService.defineFiletypeByTybleName(tablename), null));
+        model.addAttribute("filesTypeInput", dyshaFileService.getAcceptedType(tablename));
         model.addAttribute("globalUser", new GlobalAppUser(user, workerByUserId));
         return "addFiles";
     }
@@ -47,7 +50,7 @@ public class DyshaFilesController {
                            @ModelAttribute("dyshaFile") @Valid DyshaFile dyshaFile, BindingResult result, Model model, @ModelAttribute("globalUser") GlobalAppUser user) throws IOException {
        //verifier la taille du fichier
         if (file.getSize() > 5000000) { // le fichier doit peser environ 0,5 Megga Octet
-            result.rejectValue("fileType", "file.type.invalid", "Le fichier doit peser environ 0.5 Megga Octets. <br> Veuillez compresser votre image.");
+            result.rejectValue("fileType", "file.type.invalid", "Le fichier doit peser environ 0.5 Megga Octets. <br> Veuillez compresser votre image svp.");
             model.addAttribute("errors", result.getAllErrors());
             return "addFiles";
         }
@@ -76,6 +79,20 @@ public class DyshaFilesController {
             return ResponseEntity.notFound().build();
         }
         return new ResponseEntity<>(dyshaFile.getFile(), dyshaFile.buildHeadersFor(user.getUser().getFirstName()), HttpStatus.OK);
+    }
+
+    @GetMapping("/files/{uniqueName}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String uniqueName) {
+        DyshaFile file = dyshaFileService.findByUniqueName(uniqueName);
+        if (file != null) {
+            ByteArrayResource resource = new ByteArrayResource(file.getFile());
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + uniqueName + "\"")
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ModelAttribute("user")

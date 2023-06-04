@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<header th:insert="fragments/general.html :: head(title='WillAgropastoral-notifications')"></header>
+<link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+<header th:insert="fragments/general.html :: head(title='Dysha-Jobs-notifications')"></header>
 <body>
 <div class="container-fluid">
     <h1 th:if="${text} != null" th:text="${text}" class="alert-success">Please check your mails</h1>

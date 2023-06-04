@@ -59,6 +59,6 @@ public class RegistrationController {
 
     @ModelAttribute("formular")
     RegistrationRequest request() {
-        return new RegistrationRequest(null, null, null, null, null);
+        return new RegistrationRequest(null, null, null, null, null, null);
     }
 }

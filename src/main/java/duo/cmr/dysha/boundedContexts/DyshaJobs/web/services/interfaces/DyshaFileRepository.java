@@ -28,4 +28,5 @@ public interface DyshaFileRepository {
 
     List<DyshaFile> findAllByEntityId(Long entityId);
 
+    DyshaFile findByUniqueName(String uniqueName);
 }

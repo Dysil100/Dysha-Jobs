@@ -38,7 +38,7 @@ public class RegistrationService {
             if (customEmailValidator.test(request.getEmail())) {
                 AppUserRole role = getRole(request.getEmail());
                 AppUser appUser = new AppUser(
-                        request.getFirstName(), request.getLastName(), request.getEmail(), request.getPassword(), role
+                        request.getFirstName(), request.getLastName(), request.getEmail(), request.getTelephone(), request.getPassword(), role
                 );
                 return appUserService.signUpUser(appUser);
             } else {
