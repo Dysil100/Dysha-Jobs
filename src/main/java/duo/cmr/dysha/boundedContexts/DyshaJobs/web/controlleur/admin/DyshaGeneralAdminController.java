@@ -75,8 +75,8 @@ public class DyshaGeneralAdminController {
 
     @GetMapping("/dyshajobs/mesdocuments/{workerId}")
     public String workerDocuments(@PathVariable("workerId") Long workerId, @ModelAttribute("globalUser") GlobalAppUser user, @org.jetbrains.annotations.NotNull Model model) {
-        List<DyshaFile> allByUserId = dyshaFileService.findAllByEntityId(workerId);
-        model.addAttribute("dyshaFiles", allByUserId);
+        List<DyshaFile> allByEntityId = dyshaFileService.findAllByEntityId(workerId);
+        model.addAttribute("dyshaFiles", allByEntityId);
         model.addAttribute("globalUser", user);
         return "addFiles";
     }
@@ -84,8 +84,9 @@ public class DyshaGeneralAdminController {
     @PostMapping("/dyshajobs/delete/file")
     public String deleteFile(@ModelAttribute("fileId") Long fileId, @ModelAttribute("globalUser") @NotNull GlobalAppUser user) {
         // Récupérer le fichier à partir de l'ID
+        DyshaFile fileById = dyshaFileService.findFileById(fileId);
         dyshaFileService.deleteById(fileId);
-        return "redirect:/dyshajobs/mesdocuments/" + user.getWorker().getId();
+        return "redirect:/dyshajobs/mesdocuments/" + fileById.getEntityId();
     }
 
     @GetMapping("/dyshajobs/dyshaprofil/{workerId}")

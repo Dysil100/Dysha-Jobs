@@ -54,7 +54,8 @@ public class DyshaFileRepositoryImpl implements DyshaFileRepository {
 
     @Override
     public DyshaFile findByUniqueName(String uniqueName) {
-        return daoDyshaFileRepository.existsByTableName("DyshaJobs_Logo") ? toDyshaFileList(daoDyshaFileRepository.findAllByTableName("DyshaJobs_Logo")).stream().toList().get(0) : null;
+        List<DyshaFile> dyshaJobsLogo1 = toDyshaFileList(daoDyshaFileRepository.findAllByTableName("DyshaJobs_Logo")).stream().toList();
+        return !dyshaJobsLogo1.isEmpty()  ? dyshaJobsLogo1.get(dyshaJobsLogo1.size() -1) : null;
     }
 
     @Override

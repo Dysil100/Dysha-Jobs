@@ -2,12 +2,11 @@ package duo.cmr.dysha.boundedContexts.DyshaJobs.web.controlleur.user;
 
 
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshaworker.DyshaWorker;
+import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshaworker.WorkerDescription;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.globaluser.GlobalAppUser;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.web.services.subservices.DyshaWorkerService;
 import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUser;
-import duo.cmr.dysha.boundedContexts.dasandere.persistence.annotations.AdminOnly;
 import duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.AppUserService;
-import duo.cmr.dysha.boundedContexts.generalhelpers.matchers.MyMatchValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

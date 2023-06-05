@@ -1,6 +1,5 @@
-package duo.cmr.dysha.boundedContexts.DyshaJobs.web.controlleur.user;
+package duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshaworker;
 
-import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshaworker.DyshaWorker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

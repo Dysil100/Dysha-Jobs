@@ -48,7 +48,9 @@ public class DyshaFilesController {
     @PostMapping("/dyshajobs/files")
     public String addFiles(@RequestParam("file") Part file,
                            @ModelAttribute("dyshaFile") @Valid DyshaFile dyshaFile, BindingResult result, Model model, @ModelAttribute("globalUser") GlobalAppUser user) throws IOException {
-       //verifier la taille du fichier
+        System.out.println(dyshaFile);
+
+        //verifier la taille du fichier
         if (file.getSize() > 5000000) { // le fichier doit peser environ 0,5 Megga Octet
             result.rejectValue("fileType", "file.type.invalid", "Le fichier doit peser environ 0.5 Megga Octets. <br> Veuillez compresser votre image svp.");
             model.addAttribute("errors", result.getAllErrors());
