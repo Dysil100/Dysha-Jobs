@@ -1,4 +1,5 @@
 I - App Starten
+         chmod +x gradlew
 
         ##Workflows acces token:  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
         ##Workflows acces token 2:  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
