@@ -10,20 +10,20 @@ spring:
   profiles:
     active: google
   datasource:
-    username: Dyshajobs
+    username: dyshajobs
     password: iamgroot
-    url: jdbc:postgresql://localhost:15000/Dyshajobs
+    url: jdbc:postgresql://localhost:15000/dyshajobs
 
   flyway:
     create-schemas: true
-    url: jdbc:postgresql://localhost:15000/Dyshajobs
-    user: Dyshajobs
+    url: jdbc:postgresql://localhost:15000/dyshajobs
+    user: dyshajobs
     password: iamgroot
 
   resources:
     chain:
       proxy:
-        host: Dyshajobs
+        host: dyshajobs
         port: 80
 
   mail:

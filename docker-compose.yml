@@ -5,6 +5,6 @@ services:
     ports:
       - "15000:5432"
     environment:
-      - "POSTGRES_DB=Dyshajobs"
-      - "POSTGRES_USER=Dyshajobs"
+      - "POSTGRES_DB=dyshajobs"
+      - "POSTGRES_USER=dyshajobs"
       - "POSTGRES_PASSWORD=iamgroot"
