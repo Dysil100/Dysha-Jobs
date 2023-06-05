@@ -8,4 +8,3 @@ services:
       - "POSTGRES_DB=Dyshajobs"
       - "POSTGRES_USER=Dyshajobs"
       - "POSTGRES_PASSWORD=iamgroot"
-  

@@ -4,11 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DyshaJobs {
+public class DyshaJobsApplication {
     // TODO: 03.02.22 Fetch all data in an .excel oder .csv file while server ist running
 
     public static void main(String[] args) {
-        SpringApplication.run(DyshaJobs.class, args);
+        SpringApplication.run(DyshaJobsApplication.class, args);
     }
 
     /*@Autowired
