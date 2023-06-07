@@ -1,8 +1,7 @@
 Manifest-Version: 1.0
 Main-Class: org.springframework.boot.loader.JarLauncher
-Start-Class: duo.cmr.willagropastoral.WillagropastoralJdbcOauthEmailAppl
- ication
-Spring-Boot-Version: 2.6.3
+Start-Class: duo.cmr.dysha.DyshaJobsApplication
+Spring-Boot-Version: 2.6.9
 Spring-Boot-Classes: BOOT-INF/classes/
 Spring-Boot-Lib: BOOT-INF/lib/
 Spring-Boot-Classpath-Index: BOOT-INF/classpath.idx
