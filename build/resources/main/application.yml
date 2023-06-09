@@ -1,30 +1,30 @@
 #email: dysha237@gmail.com
 #password: Dysha@0612
+
 dyshajobs:
   admins: silatsamdylan@gmail.com
   leaders: willagropastoral@gmail.com
-
 # Proxy pour les téléchargements de fichiers externes
 
 spring:
   profiles:
     active: google
   datasource:
-    username: dyshajobs
+    username: dysha
     password: iamgroot
-    url: jdbc:postgresql://localhost:15000/dyshajobs
-    #url: jdbc:postgresql://172.18.0.2/dyshajobs
+    url: jdbc:postgresql://localhost:5432/dysha
+    #url: jdbc:postgresql://172.18.0.2/dysha
 
   flyway:
     create-schemas: true
-    url: jdbc:postgresql://localhost:15000/dyshajobs
-    user: dyshajobs
+    url: jdbc:postgresql://localhost:5432/dysha
+    user: dysha
     password: iamgroot
 
   resources:
     chain:
       proxy:
-        host: dyshajobs
+        host: dysha
         port: 80
 
   mail:

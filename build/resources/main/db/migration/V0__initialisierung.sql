@@ -5,3 +5,12 @@ DROP TABLE IF EXISTS dyshajob;
 DROP TABLE IF EXISTS dyshaworker;
 DROP TABLE IF EXISTS workerjobrelation;
 DROP TABLE IF EXISTS dysha_file;
+CREATE ROLE dyshajobs WITH
+    LOGIN
+    SUPERUSER
+    CREATEDB
+    CREATEROLE
+    INHERIT
+    NOREPLICATION
+    PASSWORD 'iamgroot';
+
