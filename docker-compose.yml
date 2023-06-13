@@ -1,41 +1,10 @@
-version: "3"
+version: "3.1"
 services:
-  postgres_db:
-    container_name: postgres_db
-    image: postgres
-    environment:
-      POSTGRES_USER: dysha
-      POSTGRES_PASSWORD: iamgroot
-      PGDATA: /data/postgres
-    volumes:
-      - postgres_db:/data/postgres
+  database:
+    image: postgres:14.1-alpine3.15
     ports:
-      - "5432:5432"
-    networks:
-      - postgres-net
-    restart: unless-stopped
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
+      - "15000:5432"
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-      - ../backup:/tmp/backup
-    command: sh -c "chmod 777 /tmp/backup"
-    ports:
-      - "5050:80"
-    networks:
-      - postgres-net
-    restart: unless-stopped
-
-networks:
-  postgres-net:
-    driver: bridge
-
-volumes:
-  postgres_db:
-  pgadmin:
+      - "POSTGRES_DB=dysha"
+      - "POSTGRES_USER=dysha"
+      - "POSTGRES_PASSWORD=iamgroot"

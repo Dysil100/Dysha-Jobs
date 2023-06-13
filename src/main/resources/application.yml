@@ -1,23 +1,23 @@
 #email: dysha237@gmail.com
 #password: Dysha@0612
-
-dyshajobs:
+dysha:
   admins: silatsamdylan@gmail.com
   leaders: willagropastoral@gmail.com
+
 # Proxy pour les téléchargements de fichiers externes
 
 spring:
-  profiles:
-    active: google
   datasource:
     username: dysha
     password: iamgroot
-    url: jdbc:postgresql://localhost:5432/dysha
-    #url: jdbc:postgresql://172.18.0.2/dysha
+    url: jdbc:postgresql://localhost:15000/dysha
+
+  profiles:
+    active: google
 
   flyway:
     create-schemas: true
-    url: jdbc:postgresql://localhost:5432/dysha
+    url: jdbc:postgresql://localhost:15000/dysha
     user: dysha
     password: iamgroot
 
@@ -31,8 +31,6 @@ spring:
     default-encoding: UTF-8
     host: smtp.gmail.com
     port: 587
-    #host: localhost
-    #port: 1025
     username: dysha237@gmail.com
     password: oboaeknjxqtyamoi
     protocol: smtp
@@ -44,10 +42,9 @@ spring:
           auth: true
           starttls:
             enable: true
-          connectiontimeout: 5000
+          connection-timeout: 5000
           timeout: 3000
-          writetimeout: 5000
-
+          write timeout: 5000
 
   logging:
     level:

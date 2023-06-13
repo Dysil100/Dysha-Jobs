@@ -25,9 +25,9 @@ public class RegistrationService {
 
     // TODO: 21.02.22 localhot to https://dysha-enterprise.com change for production
 
-    @Value("${dyshajobs.admins}")
+    @Value("${dysha.admins}")
     private final List<String> admins;
-    @Value("${dyshajobs.leaders}")
+    @Value("${dysha.leaders}")
     private final List<String> leaders;
 
     private  AppUserService appUserService;
