@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/productliste.css}" type="text/css" href="../static/css/productliste.css"/>
+  <link rel="stylesheet" th:href="@{/css/productdetails.css}" type="text/css" href="../static/css/productdetails.css"/>
+  <script src="/js/productdetails.js" th:src="@{/js/productdetails.js}"></script>
+  <title>Product Details</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: goodDealsHeader"></header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div th:classappend="${index == 0} ? 'carousel-item active' : 'carousel-item'" th:each="image, index : ${product.images}">
+              <img th:src="@{/files/{fileName}(fileName=${image})}" class="card-img-top" alt="Product Image" src="#">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${product.titre}"></h5>
+          <p class="card-text" th:text="${product.description}"></p>
+          <p class="card-text"><strong>Price:</strong> <span th:text="${product.prix}"></span> XAF</p>
+          <p class="card-text"><strong>Quartier:</strong> <span th:text="${product.quartier}"></span></p>
+          <p class="card-text"><strong>City:</strong> <span th:text="${product.getRegion}"></span></p>
+          <p class="card-text"><strong>Vendeur:</strong> <span th:text="${product.userEmail}"></span></p>
+          <p class="card-text"><small class="text-muted">Created at <span th:text="${product.createdAt}"></span>, updated at <span th:text="${product.updatedAt}"></span></small></p>
+          <a th:href="@{/productliste}" class="btn btn-secondary">Retour</a>
+          <a th:href="@{/contact/{productId}(productId=${product.id})}" class="btn btn-primary">Contacter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

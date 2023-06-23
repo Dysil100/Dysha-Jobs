@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a DyshaJob</title>
+    <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+    <link rel="stylesheet" th:href="@{/css/newdyshajob.css}" type="text/css" href="../../static/css/newdyshajob.css"/>
+    <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+</head>
+<body>
+<header th:replace="fragments/general.html :: dyshaJobsHeader"></header>
+<h1>Alors, Un nouveau poste DyshaJob a proposer ?</h1>
+<form th:action="@{/dyshajobs/createDyshaJob}" th:object="${dyshaJob}" method="post">
+    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger"></div>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}" required />
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="employeur">Employeur:</label>
+        <input type="text" id="employeur" th:field="*{employeur}" required />
+    </div>
+    <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" th:field="*{location}" required />
+    </div>
+    <div class="form-group">
+        <button type="submit">Create</button>
+    </div>
+    <label for="jobImages">Images:</label>
+    <input type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="displayImages(event)"><br>
+</form>
+<footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
+</body>
+</html>

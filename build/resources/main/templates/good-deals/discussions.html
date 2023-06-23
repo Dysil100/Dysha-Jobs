@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+<head>
+    <meta charset="UTF-8">
+    <title>Conversations</title>
+  <link rel="stylesheet" th:href="@{/css/productliste.css}" type="text/css" href="../static/css/productliste.css"/>
+  <link rel="stylesheet" th:href="@{/css/discussions.css}" type="text/css" href="../static/css/discussions.css"/>
+
+</head>
+<body>
+<header th:replace="fragments/general.html :: goodDealsHeader"></header>
+<div class="padding">
+<div th:if="${not #lists.isEmpty(discussions)}" class="discussion-list" th:each="discussion : ${discussions}">
+  <a th:href="@{/discussions/{id}(id=${discussion.discussionHash})}">
+  <div class="discussion">
+    <div class="discussion-avatar">
+      <img src="https://via.placeholder.com/60x60.png" alt="Avatar" />
+    </div>
+    <div class="discussion-info">
+      <h2 class="discussion-name" th:text="${discussion.getCurrentReceiverName(sender)}">Nom du destinataire</h2>
+      <p class="discussion-preview" th:text="${discussion.getLastMessage().message}">
+        Apperçu du dernier message envoyé ou recu. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </p>
+      <p class="discussion-date" th:text="${discussion.getLastMessage().createdAt}">Il y a 2 heures</p>
+    </div>
+  </div>
+  </a>
+</div>
+
+  <!-- Autres discussions -->
+</div>
+</body>
+</html>

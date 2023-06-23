@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Profil</title>
+  <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+  <link rel="stylesheet" th:href="@{/css/dyshaprofil.css}" type="text/css" href="../../static/css/dyshaprofil.css"/>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+  <style th:inline="text">
+    body {
+      background-image: url('data:image/jpeg;base64,[[${globalUser.worker.encodedImageProfile}]]');
+    }
+  </style>
+</head>
+<body>
+<header th:replace="fragments/general.html :: dyshaJobsHeader"></header>
+<div class="profil-photo">
+<div class="container" th:object="${globalUser}">
+  <h1>Mon Profil</h1>
+<div th:if="${globalUser.worker.hasNoImage()}" class="jobs"> <a th:href="@{/dyshajobs/files/{tablename} (tablename=${globalUser.worker.tableName()})}">Ajouter une photo de Profil</a></div>
+<div th:if="${globalUser.isAdmin()}" class="jobs"> <a th:href="@{/dyshajobs/mesdocuments/{workerId}/ (workerId=${globalUser.worker.id})}">Les Document de cet utilisateurs</a></div>
+<div th:if="${globalUser.isAdmin()}" class="jobs"> <a th:href="@{/dyshajobs/mesDyshaJobs/{userId}/ (userId=${globalUser.worker.userId})}">Les DyshaJobs de cet Utilisateur</a></div>
+  <table th:if="${globalUser.user} != null">
+    <tr>
+      <th>Prénom</th>
+      <td th:text="${globalUser.user.firstName}"></td>
+    </tr>
+    <tr>
+      <th>Nom</th>
+      <td th:text="${globalUser.user.lastName}"></td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td th:text="${globalUser.user.email}"></td>
+    </tr>
+    <tr>
+      <th>Bio</th>
+      <td th:text="${globalUser.worker.description}"></td>
+    </tr>
+    <tr>
+      <th>Mot de passe</th>
+      <td>*******</td>
+    </tr>
+    <tr>
+      <th>Rôle</th>
+      <td th:text="${globalUser.user.role}"></td>
+    </tr>
+    <tr>
+      <th>Verrouillé</th>
+      <td th:text="${globalUser.user.locked} ? 'Oui' : 'Non'"></td>
+    </tr>
+    <tr>
+      <th>Activé</th>
+      <td th:text="${globalUser.user.enabled} ? 'Oui' : 'Non'"></td>
+    </tr>
+  </table>
+</div>
+</div>
+<footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/dyshavideo.css}" type="text/css" href="../static/css/dyshavideo.css"/>
+    <script src="/js/dyshavideoscript.js" th:src="@{/js/dyshavideoscript.js}"></script>
+    <title>Lecture de la vidéo</title>
+</head>
+<body>
+<div class="video-container">
+    <div class="video-player">
+        <video id="videoPlayer" th:src="@{/stream/{videoFilename}(videoFilename=${videoOjk.videoFileName})}" controls autoplay></video>
+    </div>
+    <div class="video-details">
+        <h2 th:text="${videoOjk.title}">Auteur</h2>
+        <p th:text="${videoOjk.postedOn}">Date de publication</p>
+        <p th:text="${videoOjk.views} + ' vues'">Nombre de vues</p>
+        <p th:text="${videoOjk.likes} + ' likes'">Likes</p>
+        <button th:onclick="'subscribeTo(' + ${videoOjk.user.id} + ')'"  onclick="subscribeTo(${videoOjk.user.id})">S'abonner</button>
+        <button th:onclick="'likeVideo(' + ${videoOjk.id}+ ')'">J'aime</button>
+        <a th:href="@{/profile/{creatorId}(creatorId=${videoOjk.user.id})}">Accéder au profil du créateur</a>
+    </div>
+</div>
+
+<div class="comment-section">
+    <h3>Commentaires</h3>
+    <!-- Afficher les commentaires existants -->
+    <div th:each="comment : ${videoOjk.comments}">
+        <!--p th:text="${comment.author}"></p-->
+        <p th:text="${comment.content}"></p>
+    </div>
+
+    <!-- Formulaire pour ajouter un commentaire -->
+    <form th:action="@{/video/{videoId}/comment(comment=${newComment})(videoId=${videoOjk.id})}" method="post">
+        <textarea name="commentContent" rows="3" placeholder="Ajouter un commentaire"></textarea>
+        <button type="submit">Commenter</button>
+    </form>
+</div>
+
+
+<!--button onclick="playVideo()">Lecture</button-->
+<script>
+    function playVideo() {
+        var video = document.getElementById('videoPlayer');
+        video.play();
+    }
+</script>
+</body>
+</html>

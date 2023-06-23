@@ -132,7 +132,7 @@ IV- Anbieter:
         #Scritte
             (i)-  psql -h localhost -p 15000 -U willagropastoral -W -d willagropastoral
                     der danch wegen (-w) gefragt pasword ist: 'iamgroot'
-            (ii)-  \i V1__tabelle_erstellen.sql
+            (ii)-  \i V1__dysha-jobs.sql
             (iii)- \i V2__exampleData.sql
 
 

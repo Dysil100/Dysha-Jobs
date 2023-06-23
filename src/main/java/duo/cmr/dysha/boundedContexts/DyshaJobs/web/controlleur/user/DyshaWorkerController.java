@@ -30,7 +30,7 @@ public class DyshaWorkerController {
     public String showWorkerForm(Model model, @ModelAttribute("globalUser") GlobalAppUser globalAppUser, @ModelAttribute("user") AppUser user) {
         model.addAttribute("globalUser", globalAppUser);
         model.addAttribute("dyshaworker", new DyshaWorker(user.getFullName(), null, null, null,  null, null, user.getId()));
-        return "newdyshajobworker";
+        return "dysha_jobs/newdyshajobworker";
     }
 
     @PostMapping("/dyshajobs/newdyshaworker")
@@ -42,7 +42,7 @@ public class DyshaWorkerController {
 
         if (result.hasErrors()) {
             model.addAttribute("dyshaworker", worker);
-            return "newdyshajobworker";
+            return "dysha_jobs/newdyshajobworker";
         }
         worker.setUserId(user.getId());
         worker.setName(user.getFullName());

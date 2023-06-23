@@ -2,9 +2,6 @@ package duo.cmr.dysha.boundedContexts.generalweb;
 
 import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUser;
 import duo.cmr.dysha.boundedContexts.dasandere.web.services.ServiceSupreme;
-import duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.AppUserService;
-import io.micronaut.http.annotation.Post;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

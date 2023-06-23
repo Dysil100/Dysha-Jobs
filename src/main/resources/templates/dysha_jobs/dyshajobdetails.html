@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Détails du Job</title>
+  <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+  <link rel="stylesheet" th:href="@{/css/dyshajobdetails.css}" type="text/css" href="../../static/css/dyshajobdetails.css"/>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+</head>
+<body  th:class="'job-ad'"
+       th:style="'--job-bg-image: url(data:image/jpeg;base64,' + ${job.encodedImage} + ')'">
+<header th:replace="fragments/general.html :: dyshaJobsHeader"></header>
+<main>
+  <section class="job-details">
+    <h2 th:text="${job.title} + ' chez ' + ${job.employeur}"></h2>
+    <p th:text="${job.description}"></p>
+    <p>Posté le <span th:text="${job.postedDate}"></span> par <span th:text="${job.employeur}"></span> à <span th:text="${job.location}"></span></p>
+    <div th:if="${!globalUser.dyshaUserExist()}" class="postuler" > <a th:href="@{/dyshajobs/newdyshaworker/}" class="btn btn-primary">Ajouter une descriptrion et quelque documents si vous souhaitez postuler</a></div>
+    <div th:if="${globalUser.isAdmin()}">
+      <div th:if="${job.hasNoImage()}" class="jobs"> <a th:href="@{/dyshajobs/files/{tablename}/{entityid}/{fileType} (tablename=${job.tableName()}, entityid=${job.id}, fileType='image')}">Yo boss Stp Ajouter une Image pour ce Job</a></div>
+      <div th:if="${globalUser.dyshaUserExist()}">
+        <div th:if="${!globalUser.hasValidationForJob(job.getId()) && globalUser.alreadyPostlutlateFor(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesDyshaJobs}" class="btn btn-primary">Vous serrez contacté via Whatsapp ou Mail par l'annonceur a propos de ce Job en cas de validation</a></div>
+        <div th:if="${globalUser.alreadyPostlutlateFor(job.getId()) && globalUser.hasValidationForJob(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesdocuments}" class="btn btn-primary">Vous pouvez Visualiser votre Contrat de travail.</a></div>
+        <div th:if="${!globalUser.alreadyPostlutlateFor(job.getId()) && validations.loadedDocuments}" class="postuler" > <a th:href="@{/dyshajobs/postuler/{jobId}(jobId=${job.id})}" class="btn btn-primary">Postuler</a></div>
+        <div th:if="${!validations.isLoadedCurriculumVitae()}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename}/{entityid}/{filesType} (tablename='CV_document', entityid=${globalUser.worker.id}, filesType='pdf')}" class="btn btn-primary">Ajouter un pdf de votre Curriculum Vitae</a></div>
+        <div th:if="${!validations.loadedLastDiplome}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename}/{entityid}/{filesType} (tablename='Last_Diplome_document', entityid=${globalUser.worker.id}, filesType='pdf')}" class="btn btn-primary">Ajouter un pdf de votre plus haut diplome egalement</a></div>
+        <div th:if="${!validations.loadedIdCard}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename}/{entityid}/{filesType} (tablename='ID_Card_document', entityid=${globalUser.worker.id}, filesType='image')}" class="btn btn-primary">Ajouter aussi une image de votre piece d'identité</a></div>
+      </div>
+    </div>
+    <div th:unless="${globalUser.isAdmin()}">
+      <div th:if="${globalUser.dyshaUserExist()}">
+        <div th:if="${!globalUser.hasValidationForJob(job.getId()) && globalUser.alreadyPostlutlateFor(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesDyshaJobs}" class="btn btn-primary">Vous serrez contacté via Mail par l'annonceur a propos de ce DyshaJob</a></div>
+        <div th:if="${globalUser.alreadyPostlutlateFor(job.getId()) && globalUser.hasValidationForJob(job.getId())}" class="postuler" > <a th:href="@{/dyshajobs/mesdocuments}" class="btn btn-primary">Vous pouvez Visualiser votre Contrat de travail.</a></div>
+        <div th:if="${!globalUser.alreadyPostlutlateFor(job.getId()) && validations.loadedDocuments}" class="postuler" > <a th:href="@{/dyshajobs/postuler/{jobId}(jobId=${job.id})}" class="btn btn-primary">Postuler</a></div>
+        <div th:if="${!validations.isLoadedCurriculumVitae()}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename} (tablename='CV_document')}" class="btn btn-primary">Ajouter un pdf de votre Curriculum Vitae</a></div>
+        <div th:if="${!validations.loadedLastDiplome}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename} (tablename='Last_Diplome_document')}" class="btn btn-primary">Ajouter un pdf de votre plus haut diplome egalement</a></div>
+        <div th:if="${!validations.loadedIdCard}" class="postuler" > <a th:href="@{/dyshajobs/files/{tablename} (tablename='ID_Card_document')}" class="btn btn-primary">Ajouter aussi une image de votre piece d'identité</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
+</body>
+</html>

@@ -4,13 +4,9 @@ DROP TABLE IF EXISTS archiv;
 DROP TABLE IF EXISTS dyshajob;
 DROP TABLE IF EXISTS dyshaworker;
 DROP TABLE IF EXISTS workerjobrelation;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS discussion;
+DROP TABLE IF EXISTS chatmessage;
+DROP TABLE IF EXISTS dysha_files;
 DROP TABLE IF EXISTS dysha_file;
-CREATE ROLE dyshajobs WITH
-    LOGIN
-    SUPERUSER
-    CREATEDB
-    CREATEROLE
-    INHERIT
-    NOREPLICATION
-    PASSWORD 'iamgroot';
 

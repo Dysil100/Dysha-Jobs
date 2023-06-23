@@ -3,7 +3,7 @@ package duo.cmr.dysha.boundedContexts.DyshaJobs.web.configuration;
 
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshajob.DyshaJob;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshaworker.DyshaWorker;
-import duo.cmr.dysha.boundedContexts.DyshaJobs.persistence.dyshafile.FileTypeService;
+import duo.cmr.dysha.boundedContexts.dyshafile.persistance.FileTypeService;
 import duo.cmr.dysha.boundedContexts.generalhelpers.generalresearch.MyGeneralSearcher;
 import duo.cmr.dysha.boundedContexts.generalhelpers.matchers.MyMatchValidator;
 import lombok.AllArgsConstructor;

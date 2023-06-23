@@ -22,13 +22,6 @@ import static duo.cmr.dysha.boundedContexts.routen.Routen.*;
 public class AdminController {
     private ServiceSupreme serviceSupreme;
 
-    @GetMapping("/goodeals/profil")
-    public String userprofil(Model model, @ModelAttribute("text") String text, @ModelAttribute("profile") AppUser currentUser) {
-        model.addAttribute("text", text);
-        model.addAttribute("role", "user");
-        model.addAttribute("profile", currentUser);
-        return "gooddealsprofil";
-    }
 
     @GetMapping(EMPTYROUTE)
     public String adminindex(Model model, @ModelAttribute("text") String text) {

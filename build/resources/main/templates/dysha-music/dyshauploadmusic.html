@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload de musique</title>
+  <link rel="stylesheet" th:href="@{/css/dyshauploadmusic.css}" type="text/css" href="../static/css/dyshauploadmusic.css"/>
+</head>
+<body>
+<header th:replace="fragments/general.html :: dyshmusicheader"></header>
+<main>
+  <section class="upload">
+    <h2>Uploader une musique</h2>
+    <form th:object="${musicForm}" th:action="@{/dyshamusic/upload}" action="/dyshamusic" method="post" enctype="multipart/form-data">
+      <label for="title">Titre</label>
+      <input type="text" id="title" name="title" required>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required></textarea>
+      <label for="musicFile">Fichier de musique</label>
+      <input type="file" id="musicFile" name="musicFile" accept=".mp3" required>
+      <label for="thumbnailFile">Image de couverture</label>
+      <input type="file" id="thumbnailFile" name="thumbnailFile" accept="image/*" required>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</main>
+<footer>
+  <p>© 2023 Spotify AB</p>
+</footer>
+</body>
+</html>

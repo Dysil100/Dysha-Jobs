@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <script src="/js/spotifylikepage.js" th:src="@{/js/spotifylikepage.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/spotifylikepage.css}" type="text/css" href="../static/css/spotifylikepage.css"/>
+  <link rel="stylesheet" th:href="@{/css/DyshaMusicIndex.css}" type="text/css" href="../static/css/DyshaMusicIndex.css"/>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <link rel="shortcut icon" th:href="@{/dysha_files/{fileName}(filName=${dyshamusic.thumbnailFileName})}" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<header th:replace="fragments/general.html :: dyshmusicheader"></header>
+<div class="player">
+  <div class="wrapper">
+    <div class="details">
+      <div th:text="'Playing ' + ${dyshamusic.title} + ' of ' + ${dyshamusic.user.fullName}" class="now-playing">PLAYING x OF y</div>
+      <div class="track-art"></div>
+      <div th:text="${dyshamusic.title}" class="track-name">Track Name</div>
+      <div th:text="${dyshamusic.user.fullName}" class="track-artist">Track Artist</div>
+    </div>
+
+    <div class="slider_container">
+      <div class="current-time">00:00</div>
+      <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
+      <div class="total-duration">00:00</div>
+    </div>
+
+    <div class="slider_container">
+      <i class="fa fa-volume-down"></i>
+      <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
+      <i class="fa fa-volume-up"></i>
+    </div>
+
+    <div class="buttons">
+      <a th:href="@{likedyshamusic/{musicId}(musicId=${dyshamusic.id})}">
+        <i type="submit"  class="fas fa-2x add-to-favorite" th:class="${liked} ? 'added-to-favorite fas fa-2x' : 'add-to-favorite fas fa-2x'" title="add to favoris"></i>
+      </a>
+      <a th:if="${prev}" th:href="@{/dyshamusic/{musicFileName}(musicFileName=${prev})}">
+        <div class="prev-track">
+            <i class="fa fa-step-backward fa-2x"></i>
+        </div>
+      </a>
+
+      <div class="playpause-track" onclick="playpauseTrack()">
+        <audio name="dysha-playing" class="dysha-playing" id="audio" th:src="@{/dysha_files/{fileName}(fileName=${dyshamusic.musicFileName})}">
+          Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+        <i class="fa fa-play-circle fa-5x"></i>
+      </div>
+      <a th:if="${next}" th:href="@{/dyshamusic/{musicFileName}(musicFileName=${next})}">
+        <div class="next-track">
+            <i class="fa fa-step-forward fa-2x"></i>
+        </div>
+      </a>
+    </div>
+
+    <div id="wave">
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+    </div>
+  </div>
+</div>
+<div id="playlist">
+  <div class="playlist-item" th:each="music : ${playlist}">
+    <a th:href="@{/dyshamusic/{musicFileName}(musicFileName=${music.musicFileName})}">
+      <img class="image.left" th:src="@{/dysha_files/{fileName}(fileName=${music.thumbnailFileName})}" alt="" src="#">
+      <p class="text-bar" th:text="${music.title + ' - ' + music.user.fullName}"></p>
+    </a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/productliste.css}" type="text/css" href="../static/css/productliste.css"/>
+  <link rel="stylesheet" th:href="@{/css/newproduct.css}" type="text/css" href="../static/css/newproduct.css"/>
+  <script src="/js/newproduct.js" th:src="@{/js/newproduct.js}"></script>
+  <title>Créer un nouveau produit</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: goodDealsHeader"></header>
+<h1>Créer un nouveau produit</h1>
+<div class="container">
+  <form method="post" th:object="${productForm}" enctype="multipart/form-data" th:action="@{/newproduct}">
+    <label hidden for="userEmail"></label>
+    <input type="text" id="userEmail" name="userEmail" hidden><br>
+
+    <label for="titre" hidden>Titre:</label>
+    <input th:field="${productForm.titre}" type="text" id="titre" name="titre" required><br>
+
+    <label for="description">Description:</label>
+    <textarea th:field="${productForm.description}" id="description" name="description"></textarea><br>
+
+    <label for="prix">Prix:</label>
+    <input th:field="${productForm.prix}" type="number" id="prix" name="prix" step="0.01" required><br>
+
+    <label hidden for="active"></label>
+    <input type="checkbox" id="active" name="active" checked hidden><br>
+     <!--:TODO fetch location data automatically.-->
+    <label for="region">Région:</label>
+    <select th:field="${productForm.region}" id="region" name="region" onchange="updateCities('ville', 'region')">
+      <option value="">Sélectionnez une région</option>
+      <option th:each="region : ${regions.keySet()}" th:value="${region}" th:text="${region}"></option>
+    </select>
+
+    <label for="ville">Ville:</label>
+    <select th:field="${productForm.ville}" type="text" id="ville" name="ville" required></select>
+
+    <label for="quartier">Quartier:</label>
+    <input th:field="${productForm.quartier}" type="text" id="quartier" name="quartier" required><br>
+
+    <label for="cathegorie">Catégorie:</label>
+    <select th:field="${productForm.cathegorie}" id="cathegorie" name="cathegorie">
+      <option th:each="cathegorie : ${cathegories}" th:value="${cathegorie}" th:text="${cathegorie}"></option>
+    </select><br>
+
+    <label for="vente">Vente:</label>
+    <input th:field="${productForm.vente}" type="checkbox" id="vente" name="vente" class="checkbox-icon" checked><br>
+
+    <label for="productImages">Images:</label>
+    <input type="file" id="productImages" name="productImages" accept="image/*" multiple onchange="displayImages(event)"><br>
+
+    <button type="submit">Créer</button>
+  </form>
+</div>
+</body>
+</html>

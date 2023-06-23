@@ -4,6 +4,7 @@ package duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshajob;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -18,16 +19,16 @@ public class DyshaJob {
     private String employeur;
     private String location;
     private Long userId;
-    private  String encodedImage;
+    private List<String> images;;
 
-    public DyshaJob(String title, String description, String employeur, String location, Long userId, String encodedImage) {
+    public DyshaJob(String title, String description, String employeur, String location, Long userId, List<String> images) {
         this.title = title;
         this.description = description;
         this.employeur = employeur;
         this.location = location;
         this.postedDate = LocalDateTime.now();
         this.userId = userId;
-        this.encodedImage = encodedImage;
+        this.images = images;
     }
 
     public DyshaJob(){}
@@ -37,7 +38,7 @@ public class DyshaJob {
     }
 
     public boolean hasNoImage(){
-        return encodedImage.isEmpty();
+        return images.isEmpty();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class DyshaJob {
                 ", employeur='" + employeur + '\'' +
                 ", location='" + location + '\'' +
                 ", userId=" + userId +
-                ", encodedImage='" + encodedImage + '\'' +
+                ", encodedImage='" + images.toString() + '\'' +
                 '}';
     }
 }

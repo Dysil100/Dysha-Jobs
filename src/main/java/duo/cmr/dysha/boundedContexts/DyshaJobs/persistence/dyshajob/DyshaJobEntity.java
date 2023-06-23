@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,13 +23,15 @@ public class DyshaJobEntity {
     private String employeur;
     private String location;
     public Long userId;
+    private List<String> images;
 
-    public DyshaJobEntity(String title, String description, LocalDateTime postedDate, String employeur, String location, Long userId) {
+    public DyshaJobEntity(String title, String description, LocalDateTime postedDate, String employeur, String location, Long userId, List<String> images) {
         this.title = title;
         this.description = description;
         this.postedDate = postedDate;
         this.employeur = employeur;
         this.location = location;
         this.userId = userId;
+        this.images = images;
     }
 }

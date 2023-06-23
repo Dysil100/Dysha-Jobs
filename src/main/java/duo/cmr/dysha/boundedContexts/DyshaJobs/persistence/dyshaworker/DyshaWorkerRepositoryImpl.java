@@ -4,9 +4,9 @@ import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshajob.DyshaJob;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshaworker.DyshaWorker;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.workerjobrelation.WorkerJobRelation;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.persistence.dyshajob.DyshaJobRepositoryImpl;
-import duo.cmr.dysha.boundedContexts.DyshaJobs.persistence.dyshafile.DyshaFileRepositoryImpl;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.persistence.workerjobrelation.WorkerJobRelationRepositoryImpl;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.web.services.interfaces.DyshaWorkerRepository;
+import duo.cmr.dysha.boundedContexts.dyshafile.web.services.DyshaFilesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +20,7 @@ public class DyshaWorkerRepositoryImpl implements DyshaWorkerRepository {
     DaoDyshaWorkerRepository daoDyshaWorkerRepository;
     WorkerJobRelationRepositoryImpl workerJobRelationRepository;
     DyshaJobRepositoryImpl dyshaJobRepository;
-    DyshaFileRepositoryImpl dyshaFileRepository;
+    DyshaFilesService dyshaFilesService;
 
     @Override
     public List<DyshaWorker> findAllWorker() {
@@ -59,8 +59,8 @@ public class DyshaWorkerRepositoryImpl implements DyshaWorkerRepository {
 
     private DyshaWorker  toWorker(DyshaWorkerEntity e) {
         List<DyshaJob> allJobsByWorkerId = dyshaJobRepository.findAllById(workerJobRelationRepository.findAllByWorkerId(e.getId()).stream().map(WorkerJobRelation::getJobId).toList());
-        String encodedPhoto = dyshaFileRepository.findLastByTableNameAndUserIdAndEntityIdAndFileType("Profil_photo_image", e.getUserId(), e.getId(), "image");
+        String profilImageName = dyshaFilesService.findProfilImageFor(e.getUserId());
         List<WorkerJobRelation> allWorkerJobRelationsByWorkerId = workerJobRelationRepository.findAllByWorkerId(e.getId());
-        return new DyshaWorker(e.getId(), e.getName(), allJobsByWorkerId, allWorkerJobRelationsByWorkerId, e.getDescription(), e.getLocation(), e.getStartedOn(), e.getUserId(), encodedPhoto);
+        return new DyshaWorker(e.getId(), e.getName(), allJobsByWorkerId, allWorkerJobRelationsByWorkerId, e.getDescription(), e.getLocation(), e.getStartedOn(), e.getUserId(), profilImageName);
     }
 }

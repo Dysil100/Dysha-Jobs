@@ -2,7 +2,7 @@ package duo.cmr.dysha.boundedContexts.DyshaJobs.persistence.dyshajob;
 
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshajob.DyshaJob;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.web.services.interfaces.DyshaJobRepository;
-import duo.cmr.dysha.boundedContexts.DyshaJobs.web.services.interfaces.DyshaFileRepository;
+import duo.cmr.dysha.boundedContexts.dyshafile.web.services.DyshaFilesService;
 import duo.cmr.dysha.boundedContexts.generalhelpers.generalresearch.MyGeneralSearcher;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class DyshaJobRepositoryImpl implements DyshaJobRepository {
     DaoDyshaJobRepository dyshaJobRepository;
-    DyshaFileRepository dyshaFileRepository;
+    DyshaFilesService dyshaFilesService;
     MyGeneralSearcher<DyshaJob> generalSearcher ;
     @Override
     public List<DyshaJob> findAllById(List<Long> jobIds) {
@@ -32,7 +32,7 @@ public class DyshaJobRepositoryImpl implements DyshaJobRepository {
     }
 
     private DyshaJobEntity toDyshaJobEntity(DyshaJob dj) {
-        return  new DyshaJobEntity(dj.getTitle(), dj.getDescription(), dj.getPostedDate(), dj.getEmployeur(), dj.getLocation(), dj.getUserId());
+        return  new DyshaJobEntity(dj.getTitle(), dj.getDescription(), dj.getPostedDate(), dj.getEmployeur(), dj.getLocation(), dj.getUserId(), dj.getImages());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class DyshaJobRepositoryImpl implements DyshaJobRepository {
     }
 
     private DyshaJob toDyshaJob(DyshaJobEntity e) {
-        return new DyshaJob(e.getId(), e.getTitle(), e.getDescription(), e.getPostedDate(), e.getEmployeur(), e.getLocation(), e.getUserId(), dyshaFileRepository.findLastByTableNameAndEntityIdAndFileType("Job_photo_image", e.getId(), "image") );
+        return new DyshaJob(e.getId(), e.getTitle(), e.getDescription(), e.getPostedDate(), e.getEmployeur(), e.getLocation(), e.getUserId(), e.getImages());
     }
 
 }

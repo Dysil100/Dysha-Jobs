@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video App</title>
+  <link rel="stylesheet" th:href="@{/css/DyshaTubeIndex.css}" type="text/css" href="../static/css/DyshaTubeIndex.css"/>
+  <script src="/js/dyshaindexscript.js" th:src="@{/js/dyshaindexscript.js}"></script>
+</head>
+<body>
+
+<!-- toolbar-->
+<div class="toolbar">
+  <header>
+    <nav>
+      <ul>
+        <li><button onclick="goToHomePage()">Accueil</button></li>
+        <li><button onclick="uploadVideo()">Upload</button></li>
+        <li><button onclick="goToMyAccount()">Mon Compte</button></li>
+        <li><button onclick="goToTendances()">Tendances</button></li>
+        <li><button onclick="goToAbonements()">Abonements</button></li>
+        <li><button onclick="goToBibliotheke()">Bibliotheke</button></li>
+        <li><button onclick="goTohistorique()">Historique</button></li>
+        <li><button onclick="goToPlaylist()">Playlists</button></li>
+        <li><button onclick="goToFavorites()">Favoris</button></li>
+      </ul>
+      <form>
+        <input type="text" placeholder="Rechercher...">
+        <button type="submit">Rechercher</button>
+      </form>
+    </nav>
+  </header>
+</div>
+
+<!--index -->
+<div class="video-container">
+  <div class="content">
+    <div class="video-list">
+      <!-- Boucle pour afficher les vidéos -->
+      <div class="video-item" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)" th:each="video : ${videos}">
+        <a th:href="@{/video/{videoFileName}(videoFileName=${video.videoFileName})}">
+          <img th:src="@{/data/{fileName}(fileName=${video.thumbnailFileName})}" alt="Thumbnail">
+          <video class="video-preview" th:src="@{/stream/{fileName}(fileName=${video.videoFileName})}"></video>
+          <div class="video-details">
+            <h2 th:text="${video.title}">Titre de la vidéo</h2>
+            <!--p th:text="${video.description}">Description</p-->
+            <p th:text="${video.user.fullName}">Nom de l'auteur</p>
+            <p th:text="${video.views} + ' vues'">Nombre de vues</p>
+            <!--p th:text="${video.likes} + ' likes'">Likes</p-->
+          </div>
+        </a>
+      </div>
+      <!-- Fin de la boucle -->
+    </div>
+  </div>
+</div>
+<!-- Le reste de votre contenu HTML -->
+</body>
+</html>
