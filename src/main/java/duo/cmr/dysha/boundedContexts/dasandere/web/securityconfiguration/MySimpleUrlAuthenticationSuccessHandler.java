@@ -2,6 +2,8 @@ package duo.cmr.dysha.boundedContexts.dasandere.web.securityconfiguration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -65,7 +67,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         throw new IllegalStateException();
     }
 
-    private String determineDyshaTargetUrl(Authentication authentication) {
+    @Contract(pure = true)
+    private @NotNull String determineDyshaTargetUrl(Authentication authentication) {
         return "productliste";
     }
 }
