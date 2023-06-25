@@ -42,14 +42,55 @@
         <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" href="/static/css/styles.css" />
 </head>
 
+
+<form th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
+    <div>
+        <label for="fcategorie">Catégorie:</label>
+        <select onchange="submit(this)" th:value="${filterForm.fcategorie}" th:field="${filterForm.fcategorie}" id="fcategorie" name="fcategorie">
+            <option value="">Toutes les catégories</option>
+            <option th:each="categorie : ${categories}" th:value="${categorie}" th:text="${categorie}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="prixMin">Prix minimum:</label>
+        <input onchange="submit(this)" th:field="${filterForm.prixMin}" type="number" id="prixMin" name="prixMin" step="0.01">
+    </div>
+    <div>
+        <label for="prixMax">Prix maximum:</label>
+        <input onchange="submit(this)" th:field="${filterForm.prixMax}" th:value="${filterForm.prixMax}" type="number" id="prixMax" name="prixMax" step="0.01">
+    </div>
+
+    <div>
+        <label for="fregion">Région:</label>
+        <select th:field="${filterForm.fregion}" th:value="${filterForm.fregion}" id="fregion" name="fregion" onchange="updateCities('fville', 'fregion')">
+            <option value="">Sélectionnez une région</option>
+            <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="fville">Ville:</label>
+        <select th:field="${filterForm.fville}" th:value="${filterForm.fville}" type="text" id="fville" name="fville" >
+            <option th:selected="${filterForm.fville}" th:value="${filterForm.fville}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="fvente">Vente:</label>
+        <select onchange="submit(this)" th:field="${filterForm.fvente}"  th:value="${filterForm.fvente}" type="checkbox" id="fvente" name="fvente">
+            <option value="true">Offre</option>
+            <option value="false">Demande</option>
+        </select>
+    </div>
+</form>
 <!--good Deals header-->
 <header th:fragment="goodDealsHeader" id="gdTopnav" class="navbar-expand-md"><div class="index-header">
-        <form th:object="${searchform}" class="form-inline my-4" th:action="@{/productliste/search}" method="get">
-            <label for="query">
-                <input id="query" class="form-control mr-sm-2" type="search" placeholder="Rechercher un produit" aria-label="Rechercher" name="query">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-            </label>
-        </form>
+    <form th:if="${searchform}" th:object="${searchform}" class="form-inline my-4" th:action="@{/productliste/search}" method="get">
+        <label for="query">
+            <form th:if="${searchform}" th:replace="fragments/general.html :: filterform"></form>
+            <input th:if="${searchform}" onchange="submit(this)" id="query" class="form-control mr-sm-2" type="search" placeholder="Rechercher un produit" aria-label="Rechercher" th:text="${searchform.query}" th:value="${searchform.query}" name="query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+        </label>
+    </form>
 
         <!-- bouton pour créer un nouveau produit -->
 
@@ -108,7 +149,7 @@
             <li th:if="${globalUser.dyshaUserExist}"><a href="#" th:href="@{/dyshajobs/dyshaprofil}">
                 <div class="profile">
                     <div class="profile-image">
-                        <img th:src="@{'data:image/png;base64,' + ${globalUser.worker.encodedImageProfile}}" alt="Photo de profil">
+                        <img th:src="@{/dysha_files/{fileName}(fileName=${globalUser.worker.encodedImageProfile})}" alt="Photo de profil">
                     </div>
                     <div class="profile-name">
                         <p th:text="${globalUser.user.lastName}"></p>
@@ -119,19 +160,6 @@
     </nav>
 </header>
 
-<div th:fragment="dyshaJobsListe(jobs, class, tittre)">
-    <section th:class="${class}">
-        <h2 th:text="${titre}">Derniers jobs</h2>
-        <div th:each="job : ${jobs}">
-            <a th:href="@{/dyshajobs/jobdetails/{id}(id=${job.id})}" class="btn btn-primary" th:class="'job-ad'"
-               th:style="'--job-bg-image: url(data:image/jpeg;base64,' + ${job.encodedImage} + ')'">
-            <h3 th:text="${job.title} + ' chez ' + ${job.employeur}"></h3>
-            <p th:text="${job.description}"></p>
-            <p>Posté le <span th:text="${job.postedDate}"></span> par <span th:text="${job.getEmployeur}"></span> à <span th:text="${job.location}"></span></p>
-            </a>
-        </div>
-    </section>
-</div>
 <div th:fragment="dyshmusicheader">
     <header>
         <div class="logo">
@@ -157,127 +185,33 @@
 
 <div th:fragment="dyshaJobsFooter">
     <footer class="footer">
-
-       <!-- <div class="footer-col">
-            <h4>About</h4>
-            <ul>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Services</h4>
-            <ul>
-                <li><a href="#">Advertising </a></li>
-                <li><a href="#">Job listing </a></li>
-                <li><a href="#">Career counselling</a></li>
-                <li><a href="#">Recruitment</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Legal</h4>
-            <ul>
-                <li><a href="#">Terms of use</a></li>
-                <li><a href="#">Privacy policy</a></li>
-                <li><a href="#">Accessibility</a></li>
-            </ul>
-        </div>
-        -->
         <p>&copy; 2023 - Dysha-Jobs Site de petites annonces de jobs</p>
     </footer>
 </div>
 
 
-//General index
-<header th:fragment="indexheader" id="myTopnav" class="navbar-expand-md">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand  badge-info fa" href="javascript:void(0);" onclick="myFunction()"> <span class="fa-bars">Willagropastoral</span></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo0">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center" th:href="@{/}"> <span class="fa fa-home">Aceuil</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center" th:href="@{/login}">Connection</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center " th:href="@{analyse}">Services</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center " th:href="@{/productliste}">GoodDeals</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center " th:href="@{/dyshajobs}">Dysha-Jobs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center " th:href="@{/dyshatube}">DyshaTube</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center " th:href="@{/dyshamusicindex}">Dyshamusic</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center" th:href="@{/contacts}">Contacts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center" th:href="@{/avis}">Avis</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bage badge-info text-center" th:href="@{/telecharger}">Télécharger</a>
-                </li>
-                <li class="nav-item">
-                    <form method="post" th:action="@{/logout}">
-                        <input type="hidden" name="_csrf" value="<csrf_token_value>"/>
-                        <button type="submit" class="nav-link badge badge-info text-center">Déconnexion</button>
-                    </form>                </li>
-                <span th:if="${#request.userPrincipal != null}">
-                    <li th:if="${#request.userPrincipal.principal.role.toString()} == 'ROLE_LEADER' or ${#request.userPrincipal.principal.role.toString()} == 'ROLE_ADMIN'" class="nav-item">
-                        <a class="nav-link bage badge-info text-center" th:href="@{/leaderindex/avisliste}">Liste d'avis</a>
-                    </li>
-                    <li th:if="${#request.userPrincipal.principal.role.toString()} == 'ROLE_LEADER' or ${#request.userPrincipal.principal.role.toString()} == 'ROLE_ADMIN'" class="nav-item">
-                        <a class="nav-link bage badge-info text-center" th:href="@{/leaderindex/projects}">Projects
-                            </a>
-                    <li th:if="${#request.userPrincipal.principal.role.toString()} == 'ROLE_ADMIN'" class="nav-item">
-                        <a class="nav-link badge-info text-center"
-                           th:href="@{/adminindex/addsandards}">Add new Standards</a>
-                    </li>
-                    <li th:if="${#request.userPrincipal.principal.role.toString()} == 'ROLE_LEADER' or ${#request.userPrincipal.principal.role.toString()} == 'ROLE_ADMIN'" class="nav-item">
-                        <a class="nav-link badge-info text-center"
-                           th:href="@{/leaderindex/financesuebersicht}">Finances</a>
-                    </li>
-                    <li th:if="${#request.userPrincipal.principal.role.toString()} == 'ROLE_ADMIN'" class="nav-item">
-                        <a class="nav-link badge-info text-center"
-                           th:href="@{/adminindex/userliste}">UserListe</a>
-                    </li>
-                </span>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" disabled>
-                <!--todo search form implementieren-->
-                <input disabled name="searchInput" id="searchInput0" class="form-control mr-sm-2" type="search"
-                       placeholder="Search">
-                <button disabled class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+<div th:fragment="dyshaJobsListe(jobs, class, tittre)">
+    <section th:class="${class}">
+        <h2 th:text="${titre}">Derniers jobs</h2>
+        <div th:each="job : ${jobs}" class="job-image-container">
+            <a th:href="@{/dyshajobs/jobdetails/{id}(id=${job.id})}" class="btn btn-primary" th:class="'job-ad'">
+            <img th:src="@{/dysha_files/{fileName}(fileName=${job.images.get(0)})}" class="card-img-top" alt="Product Image" src="#">
+                <h3 th:text="${job.title} + ' chez ' + ${job.employeur}"></h3>
+                <p th:text="${job.description}"></p>
+                <p>Posté le <span th:text="${job.postedDate}"></span> par <span th:text="${job.getEmployeur}"></span> à <span th:text="${job.location}"></span></p>
+            </a>
         </div>
-    </nav>
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-    </script>
-</header>
-
+    </section>
+</div>
 
 <div th:fragment="productList(allproducts)" class="products-gooddeals">
     <div class="container" th:each="product : ${allproducts}">
 
         <a th:href="@{/product/details/{id}(id=${product.id})}">
             <div class="product">
-                <img src="https://via.placeholder.com/150">
+                <img th:src="@{/dysha_files/{fileName}(fileName=${product.images.get(0)})}" class="card-img-top" alt="Product Image" src="#">
                 <div class="details">
-                    <p th:text="${product.quartier}">Ville, Quartier</p>
+                    <p th:text="${product.Region} + ' - ' + ${product.ville} + ' à ' + ${product.quartier}">Region, Vile, Quartier</p>
                     <h3 th:text="${product.titre}">Titre du produit en gras</h3>
                     <p th:text="${product.description}">Description du produit</p>
                     <p class="price" th:text="${product.prix}">Prix en gras et vert</p>

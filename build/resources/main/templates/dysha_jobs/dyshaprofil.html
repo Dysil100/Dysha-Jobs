@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>Mon Profil</title>
-  <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+  <link rel="icon" type="image/*" th:href="@{/dysha_files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
   <link rel="stylesheet" th:href="@{/css/dyshaprofil.css}" type="text/css" href="../../static/css/dyshaprofil.css"/>
   <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
   <style th:inline="text">
     body {
-      background-image: url('data:image/jpeg;base64,[[${globalUser.worker.encodedImageProfile}]]');
+      background-image: url('[[@{/dysha_files/{fileName}(fileName=${globalUser.worker.encodedImageProfile})}]]');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
   </style>
 </head>
 <body>
 <header th:replace="fragments/general.html :: dyshaJobsHeader"></header>
 <div class="profil-photo">
-<div class="container" th:object="${globalUser}">
+  <div class="container" th:object="${globalUser}">
   <h1>Mon Profil</h1>
 <div th:if="${globalUser.worker.hasNoImage()}" class="jobs"> <a th:href="@{/dyshajobs/files/{tablename} (tablename=${globalUser.worker.tableName()})}">Ajouter une photo de Profil</a></div>
 <div th:if="${globalUser.isAdmin()}" class="jobs"> <a th:href="@{/dyshajobs/mesdocuments/{workerId}/ (workerId=${globalUser.worker.id})}">Les Document de cet utilisateurs</a></div>
@@ -56,6 +59,6 @@
   </table>
 </div>
 </div>
-<footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
 </body>
+<footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
 </html>

@@ -9,7 +9,7 @@
 <main>
   <section class="upload">
     <h2>Uploader une musique</h2>
-    <form th:object="${musicForm}" th:action="@{/dyshamusic/upload}" action="/dyshamusic" method="post" enctype="multipart/form-data">
+    <form th:object="${musicForm}" th:action="@{/newdyshamusic/upload}" action="/dyshamusic" method="post" enctype="multipart/form-data">
       <label for="title">Titre</label>
       <input type="text" id="title" name="title" required>
       <label for="description">Description</label>

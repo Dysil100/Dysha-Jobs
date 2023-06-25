@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class FilesController {
     private DyshaFilesService dyshaFilesService;
 
-    @GetMapping("/files/{fileName}")
+    @GetMapping("/dysha_files/{fileName}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String fileName) {
         DyshaFile file = dyshaFilesService.findByName(fileName);

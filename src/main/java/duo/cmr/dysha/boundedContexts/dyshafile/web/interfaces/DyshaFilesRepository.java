@@ -1,5 +1,6 @@
 package duo.cmr.dysha.boundedContexts.dyshafile.web.interfaces;
 
+import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.DyshaJobValidations;
 import duo.cmr.dysha.boundedContexts.dyshafile.domain.DyshaFile;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface DyshaFilesRepository {
     DyshaFile findByUniqueName(String uniqueName);
 
     void deleteById(Long fileId);
+
+    DyshaJobValidations getValidationsFor(Long forId);
 }

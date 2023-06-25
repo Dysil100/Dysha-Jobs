@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.video-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.video-details {
+    margin-top: 20px;
+}
+
+.video-details p {
+    margin: 5px 0;
+}

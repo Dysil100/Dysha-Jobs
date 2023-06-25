@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Create a DyshaJob</title>
-    <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+    <link rel="icon" type="image/*" th:href="@{/dysha_files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
     <link rel="stylesheet" th:href="@{/css/newdyshajob.css}" type="text/css" href="../../static/css/newdyshajob.css"/>
     <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
 </head>
 <body>
 <header th:replace="fragments/general.html :: dyshaJobsHeader"></header>
 <h1>Alors, Un nouveau poste DyshaJob a proposer ?</h1>
-<form th:action="@{/dyshajobs/createDyshaJob}" th:object="${dyshaJob}" method="post">
+<form enctype="multipart/form-data" th:action="@{/dyshajobs/createDyshaJob}" th:object="${dyshaJob}" method="POST">
     <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger"></div>
     <div class="form-group">
         <label for="title">Title:</label>
@@ -28,11 +28,11 @@
         <label for="location">Location:</label>
         <input type="text" id="location" th:field="*{location}" required />
     </div>
+    <label for="jobImages">Images:</label>
+    <input required type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="displayImages(event)" enctype="multipart/form-data"><br>
     <div class="form-group">
         <button type="submit">Create</button>
     </div>
-    <label for="jobImages">Images:</label>
-    <input type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="displayImages(event)"><br>
 </form>
 <footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
 </body>

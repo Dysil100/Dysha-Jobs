@@ -1,4 +1,13 @@
-/* Style pour la navigation */
+
+.job-image-container {
+    max-width: 100%; /* Limite la largeur de la div à 100% */
+    height: auto; /* Ajuste automatiquement la hauteur en fonction de la largeur */
+}
+
+.job-image-container img {
+    width: 100%; /* Redimensionne l'image à 100% de la largeur de la div */
+    height: auto; /* Maintient le ratio de l'image */
+}/* Style pour la navigation */
 nav {
     opacity: 1;
     display: flex;

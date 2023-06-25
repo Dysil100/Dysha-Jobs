@@ -1,5 +1,6 @@
 package duo.cmr.dysha.boundedContexts.DyshaJobs.web.controlleur.user;
 
+import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.DyshaJobValidations;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.dyshajob.DyshaJob;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.workerjobrelation.WorkerJobRelation;
 import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.globaluser.GlobalAppUser;
@@ -54,6 +55,7 @@ public class DyshaJobController {
     @GetMapping("/dyshajobs/jobdetails/{id}")
     public String getJobDetails(@PathVariable Long id, Model model, @ModelAttribute("globalUser") GlobalAppUser user) {
         model.addAttribute("globalUser", user);
+        model.addAttribute("validations" ,(user.dyshaUserExist()) ? dyshaFileService.getValidationsFor(user.getWorker().getId()) : new DyshaJobValidations(false, false, false, false, false));
         model.addAttribute("job", dyshaJobService.getJobById(id));
         return "dysha_jobs/dyshajobdetails";
     }

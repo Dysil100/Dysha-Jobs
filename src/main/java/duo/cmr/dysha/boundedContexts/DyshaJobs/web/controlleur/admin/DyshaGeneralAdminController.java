@@ -17,10 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
@@ -111,7 +108,7 @@ public class DyshaGeneralAdminController {
     }
 
     @PostMapping("/dyshajobs/createDyshaJob")
-    public String createJob(Model model, @ModelAttribute("dyshaJob") DyshaJob dyshaJob, List<MultipartFile> jobImages, @NotNull BindingResult result , @ModelAttribute("globalUser") GlobalAppUser user) {
+    public String createJob(Model model, @ModelAttribute("dyshaJob") DyshaJob dyshaJob, @RequestParam("jobImages") List<MultipartFile> jobImages, @NotNull BindingResult result , @ModelAttribute("globalUser") GlobalAppUser user) {
         if (!dyshaJobService.validates(dyshaJob)) {
             model.addAttribute("dyshaJob", dyshaJob);
             result.rejectValue("title", "dyshaJob.type.invalid", "Vous avez entré des caractere non authorizé! I don't manage some special caratere. ");

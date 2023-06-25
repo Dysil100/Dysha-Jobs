@@ -1,5 +1,6 @@
 package duo.cmr.dysha.boundedContexts.dyshafile.web.services;
 
+import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.DyshaJobValidations;
 import duo.cmr.dysha.boundedContexts.dyshafile.domain.DyshaFile;
 import duo.cmr.dysha.boundedContexts.dyshafile.domain.FileInfos;
 import duo.cmr.dysha.boundedContexts.dyshafile.persistance.FileTypeService;
@@ -66,7 +67,7 @@ public class DyshaFilesService {
     }
 
     public byte[] getDataBytes(MultipartFile file) {
-        return fileTypeService.getDataBytes((Part) file);
+        return fileTypeService.getDataBytes(file);
     }
 
     public String determineFileType(byte[] filesDataBytes) {
@@ -75,6 +76,10 @@ public class DyshaFilesService {
 
     public String findProfilImageFor(Long userId) {
         List<DyshaFile> profilPhotoImages = dyshaFilesRepository.findAllByUserId(userId).stream().filter(e -> e.getTableName().equals("Profil_photo_image")).toList();
-        return profilPhotoImages.isEmpty() ? "null" : profilPhotoImages.get(0).getName();
+        return profilPhotoImages.isEmpty() ? "" : profilPhotoImages.get(0).getName();
+    }
+
+    public DyshaJobValidations getValidationsFor(Long forId) {
+        return dyshaFilesRepository.getValidationsFor(forId);
     }
 }

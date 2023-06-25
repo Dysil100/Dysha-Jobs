@@ -1,6 +1,6 @@
 package duo.cmr.dysha.boundedContexts.dyshafile.persistance;
 
-import io.micronaut.context.annotation.Bean;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Part;
 import java.io.*;
@@ -13,7 +13,10 @@ import java.util.zip.DeflaterOutputStream;
 public class FileTypeService {
     public FileTypeService() {
     }
-    private  final Map<String, String> tableTypes = new HashMap<>(Map.of("CV_document", "pdf", "Contrat_document", "pdf", "Last_Diplome_document", "pdf","ID_Card_document",  "image", "Job_photo_image", "image", "Profil_photo_image", "image", "DyshaJobs_Logo", "image"));
+    private  final Map<String, String> tableTypes = new HashMap<>(Map.of("CV_document", "application/pdf",
+            "Contrat_document", "application/pdf", "Last_Diplome_document", "application/pdf",
+            "ID_Card_document",  "image/*", "Job_photo_image", "image/*", "Profil_photo_image", "image/*",
+            "DyshaJobs_Logo", "image/*", "Dysha_Music", "mp3/audio", "Music-Thumnail", "image/*"));
     public  String defineFiletypeByTybleName(String tablename) {
         return tableTypes.getOrDefault(tablename, "Unknown: Table not found");
     }
@@ -37,9 +40,9 @@ public class FileTypeService {
 
  public  String determineFileType(byte[] fileBytes) {
         if (isImage(fileBytes)) {
-            return "image";
+            return "image/*";
         } else if (isPdf(fileBytes)) {
-            return "pdf";
+            return "application/pdf";
         } else if (isAudio(fileBytes)) {
             return "mp3/audio";
         } else if (isVideo(fileBytes)) {
@@ -115,7 +118,7 @@ public class FileTypeService {
         return true;
     }
 
-    public  byte[] getDataBytes(Part file) {
+    public  byte[] getDataBytes(MultipartFile file) {
         byte[] filesDataBytes = new byte[(int) file.getSize()];
         try (InputStream is = file.getInputStream()) {
             int read = is.read(filesDataBytes);
@@ -129,7 +132,7 @@ public class FileTypeService {
     }
 
     public  byte[] getCompressedDataBytes(Part file) throws IOException {
-        return compressBytes(getDataBytes(file));
+        return compressBytes(getDataBytes((MultipartFile) file));
     }
 
     // TODO: 18.05.2023 Ameliorer cette methode qui compresse mais detruit le fichier qui nest plus telchargeable.

@@ -16,7 +16,7 @@
         <div id="carouselExample" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div th:classappend="${index == 0} ? 'carousel-item active' : 'carousel-item'" th:each="image, index : ${product.images}">
-              <img th:src="@{/files/{fileName}(fileName=${image})}" class="card-img-top" alt="Product Image" src="#">
+              <img th:src="@{/dysha_files/{fileName}(fileName=${image})}" class="card-img-top" alt="Product Image" src="#">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">

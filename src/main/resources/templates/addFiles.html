@@ -29,7 +29,7 @@
     <form onsubmit="return checkFileSize()" th:if="${((dyshaFile.tableName == 'Profil_photo_image' || dyshaFile.tableName == 'ID_Card_document' || dyshaFile.tableName == 'CV_document' || dyshaFile.tableName == 'Last_Diplome_document') && globalUser.user.role.name() == 'ROLE_USER') || globalUser.isAdmin() || globalUser.user.role.name() == 'ROLE_LEADER'}" th:object="${dyshaFile}" th:action="@{/dyshajobs/files}" method="post" enctype="multipart/form-data">
         <!-- ID utilisateur -->
         <label hidden for="userId"></label>
-        <input  hidden th:value="${dyshaFile.userId}" type="number" id="userId" name="userId"/>
+        <input  hidden th:value="${dyshaFile.forUserId}" type="number" id="userId" name="userId"/>
 
         <!-- Nom de la table -->
         <label hidden for="tableName"></label>
@@ -47,8 +47,8 @@
         <div  th:if="${#fields.hasErrors('fileType')}" th:errors="*{fileType}" class="alert alert-danger"></div>
         <div id="error-message" class="alert alert-danger error-message" style="display: none;">Le fichier sélectionné dépasse la taille maximale autorisée. Veuillez compresser votre image</div>
         <!-- Choisir la photo -->
-        <label for="file">Chosse the File to upload</label>
-        <input th:accept="${filesTypeInput}"  type="file" id="file" name="file"/>
+        <label for="files">Chosse the File to upload</label>
+        <input required th:accept="${dyshaFile.fileType}"  type="file" id="files" name="files" enctype="multipart/form-data"/>
 
         <!-- Bouton Soumettre -->
         <input type="submit" value="Submit"/>
@@ -71,12 +71,12 @@
             <td th:text="${file.tableName}"> <span th:if="${globalUser.isAdmin()}" th:text="${file.entityId}"></span></td>
             <td th:text="${file.fileType}"></td>
             <td class="jobs" >
-                <a th:href="@{/dyshajobs/download/file/{fileId}(fileId=${file.id})}" th:text="${file.file != null ? 'Télécharger' : 'Aucun fichier'}"></a>
+                <a th:href="@{/dyshajobs/download/file/{fileId}(fileId=${file.id})}" th:text="${file.data != null ? 'Télécharger' : 'Aucun fichier'}"></a>
             </td>
             <td class="delete-file" >
                 <form th:if="${globalUser.isAdmin()}" th:action="@{/dyshajobs/delete/file}" method="post">
                     <input type="hidden" name="fileId" th:value="${file.id}" />
-                    <button type="submit" th:text="${file.file != null ? 'Suprimer ce fichier' : 'Aucun fichier'}">Suprimer le fichier</button>
+                    <button type="submit" th:text="${file.data != null ? 'Suprimer ce fichier' : 'Aucun fichier'}">Suprimer le fichier</button>
                 </form>
             </td>
         </tr>

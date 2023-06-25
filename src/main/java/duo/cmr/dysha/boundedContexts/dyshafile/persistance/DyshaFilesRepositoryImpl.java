@@ -1,5 +1,6 @@
 package duo.cmr.dysha.boundedContexts.dyshafile.persistance;
 
+import duo.cmr.dysha.boundedContexts.DyshaJobs.domain.DyshaJobValidations;
 import duo.cmr.dysha.boundedContexts.dyshafile.domain.DyshaFile;
 import duo.cmr.dysha.boundedContexts.dyshafile.web.interfaces.DyshaFilesRepository;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,16 @@ public class DyshaFilesRepositoryImpl implements DyshaFilesRepository {
     @Override
     public void deleteById(Long fileId) {
         daoDyshaFilesRepository.deleteById(fileId);
+    }
+
+    @Override
+    public DyshaJobValidations getValidationsFor(Long forId) {
+        boolean loadedIdCard = findAllByUserId(forId).stream().map(DyshaFile::getTableName).toList().contains("ID_Card_document");
+        boolean loadedLastDiplome = findAllByUserId(forId).stream().map(DyshaFile::getTableName).toList().contains("Last_Diplome_document");
+        boolean loadedCurriculumVitae = findAllByUserId(forId).stream().map(DyshaFile::getTableName).toList().contains("CV_document");
+        boolean loadedDocuments = loadedIdCard && loadedLastDiplome && loadedCurriculumVitae;
+        return new DyshaJobValidations(loadedDocuments, loadedDocuments, loadedCurriculumVitae, loadedLastDiplome, loadedIdCard);
+
     }
 
     private List<DyshaFile> toDyshaFileList(Iterable<DyshaFileEntity> allForId) {

@@ -70,7 +70,7 @@ public class DyshaFileController {
 
         // Créer un fichier Photo et Enregistrer la photo
         Long entityId = dyshaFile.getForUserId();
-        dyshaFileService.saveAll(new FileInfos(user.getUser().getId(), entityId == null ? user.getUser().getId(): entityId, dyshaFile.getTableName(), dyshaFile.getFileType()), List.of(file));
+        dyshaFileService.saveAll(new FileInfos(user.getUser().getId(), entityId == null ? user.getUser().getId(): entityId, dyshaFile.getTableName(), determineFileType), List.of(file));
         return "redirect:/dyshajobs";
     }
 

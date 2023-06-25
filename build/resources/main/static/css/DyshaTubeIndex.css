@@ -1,0 +1,125 @@
+/* Styles for the toolbar */
+.toolbar {
+    background-color: #202020;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.toolbar header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toolbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toolbar li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.toolbar button {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.toolbar input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.toolbar button[type="submit"] {
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Styles for the video container */
+.video-container {
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.content {
+    display: flex;
+}
+
+.video-list {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.video-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.video-item:hover {
+    transform: translateY(-5px);
+    background-color: #f5f5f5;
+}
+
+.video-details {
+    margin-top: 10px;
+}
+
+.video-details h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.video-details p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #777777;
+}
+
+.video-details p:last-child {
+    color: #ff0000;
+}
+
+.video-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Additional styles and animations */
+.video-item img:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.video-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Masque la vidéo initialement */
+}
+

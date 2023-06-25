@@ -27,6 +27,9 @@ public class DyshaFile {
         this.data = data;
     }
 
+    public DyshaFile() {
+    }
+
     public HttpHeaders buildHeadersFor(String userName) {
         MediaType mediaType = switch (fileType) {
             case "image" -> MediaType.IMAGE_JPEG;

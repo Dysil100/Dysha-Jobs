@@ -31,15 +31,16 @@ public class ProductController {
     @ModelAttribute("text")
     String handle(Principal user) {
         AppUser userByEmail = serviceSupreme.getUserByEmail(user.getName());
-        return "Salut  " +userByEmail.getFirstName() + " trouvons ensemble le Produit dont tu as besoin.";
+        return "Salut  " + userByEmail.getFirstName() + " trouvons ensemble le Produit dont tu as besoin.";
     }
 
     @GetMapping("/goodeals/profil")
-    public String userprofil(Model model, @ModelAttribute("text") String text, @ModelAttribute("user") AppUser currentUser) {
+    public String userprofil(Model model, @ModelAttribute("searchform") InputSearchForm searchForm,  @ModelAttribute("text") String text, @ModelAttribute("user") AppUser currentUser) {
         List<Product> allByUserId = productService.findAllByUserId(currentUser.getId());
         System.out.println("Mes produits = " + allByUserId);
         model.addAttribute("myProducts", allByUserId);
         model.addAttribute("profile", currentUser);
+        model.addAttribute("searchform", searchForm);
         return "good-deals/gooddealsprofil";
     }
 

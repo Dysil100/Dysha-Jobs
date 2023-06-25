@@ -1,3 +1,13 @@
+.job-image-container {
+    max-width: 100%; /* Limite la largeur de la div à 100% */
+    height: auto; /* Ajuste automatiquement la hauteur en fonction de la largeur */
+}
+
+.job-image-container img {
+    width: 100%; /* Redimensionne l'image à 100% de la largeur de la div */
+    height: auto; /* Maintient le ratio de l'image */
+}
+
 main {
     opacity: 0.7;
 }
