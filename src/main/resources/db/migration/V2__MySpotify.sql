@@ -50,12 +50,3 @@ create table if not exists ecoute (
                         user_id integer references users (id),
                         viewed_at timestamp default now()
 );
-
-
-
-
-create table if not exists dysha_files (
-                       id serial primary key,
-                       name varchar(255) not null,
-                       data bytea not null
-);
