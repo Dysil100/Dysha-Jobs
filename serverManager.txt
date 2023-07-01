@@ -20,11 +20,11 @@ I - App Starten
         ################################
 
     1) zum virtuallen machinen des ServerProvider Vultr  mit den Folgenden Commandos login:
-        ssh root@64.176.195.127
-        ##IP-Server: 95.179.219.29
+        ssh root@45.77.102.62
+        ##IP-Server: 45.77.102.62
         und mit following credential:
         username:root
-        password:7!hX][8G+}.Qfya6
+        password:9@eGc,-k$KHuAk6X
         cat /root/.ssh/id_rsa.pub
 
 
