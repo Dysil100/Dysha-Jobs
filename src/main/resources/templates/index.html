@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<header th:insert="fragments/general.html :: head(title='Dysha Enterprise')"></header>
-<link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
-<body class="background">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/index.css}" type="text/css" href="../../static/css/index.css"/>
+    <link rel="icon" type="image/*" th:href="@{/files/{uniqueName}(uniqueName='DyshaJobs_Logo')}">
+</head>
+<body class="ba=ckground">
 <div class="container-fluid">
-    <header th:replace="fragments/general.html :: indexheader"></header>
-    <h1>Un Bienvenue <span th:text="${text}">[ROLE] - Name</span> Dysha Enterprise </h1>
-
+    <h1>Bienvenue <span th:text="${user.firstName}">[ROLE] - Name</span> Dysha Enterprise </h1>
+    <ul>
+        <li><a th:href="@{/dyshajobs}">
+            <p> Site d'annonce de petit Jobs et services</p>
+        </a>
+        </li>
+        <li th:if="${user.isAdmin() || user.isLeader()}" ><a th:href="@{/productliste}">
+            <p>Site de vente produit et services</p></a></li>
+        <li th:if="${user.isAdmin() || user.isLeader()}"><a th:href="@{/dyshamusicindex}">
+            <p> Ecoutez et televerser vos music su r Dysha Music</p>
+        </a></li>
+    </ul>
     <div class="callout-info transbox">
-        <h2> Le site est Pour le moment en construction. Nous vous remercions de votre Comprehension</h2>
+        <h3> Le site est Pour le moment en evolution.N'hesitez pas a nous <a th:href="@{/contacts}">le signaler</a>  en cas d'erreur, ou de proposition d'amelioration sur le site Nous vous remercions de votre Comprehension</h3>
     </div>
 </div>
-<footer th:replace="fragments/general.html :: footer"></footer>
-<script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "navbar-expand") {
-            x.className += "navbar-expand-md";
-        } else {
-            x.className = "navbar-expand";
-        }
-    }
-</script>
 </body>
 </html>

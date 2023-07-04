@@ -1,3 +1,102 @@
+.toolbar {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+    right: 15px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.toolbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toolbar ul li {
+    margin-left: 10px;
+}
+
+.toolbar ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.toolbar ul li a:hover {
+    color: #d7fcf8;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .toolbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        background-color: #f1f1f1;
+        padding: 10px;
+    }
+
+    .toolbar ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .toolbar ul li:last-child {
+        margin-bottom: 0;
+    }
+
+    .toolbar ul li a {
+        color: #333;
+    }
+
+    .toolbar ul li a:hover {
+        color: #888;
+    }
+
+    .toolbar ul.open {
+        display: flex;
+    }
+}
+
+
+/* Pour les écrans plus petits que 600 pixels de large */
+@media screen and (max-width: 600px) {
+    /* Réduire la taille des éléments de la barre d'outils */
+    .toolbar li {
+        font-size: 12px;
+    }
+}
+
+/* Pour les écrans plus grands que 600 pixels de large */
+@media screen and (min-width: 600px) {
+    /* Utiliser une mise en page en ligne pour les éléments de la barre d'outils */
+    .toolbar li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+
 
 .job-image-container {
     max-width: 100%; /* Limite la largeur de la div à 100% */
@@ -50,15 +149,6 @@ nav form button[type="submit"] {
     background-color: #fff;
     color: #222;
     cursor: pointer;
-}
-
-/*background immage*/
-.job-ad {
-    opacity: 0.9;
-    background-repeat: no-repeat;
-    background-position: center center;
-    margin: 5%;
-    background-image: var(--job-bg-image);
 }
 
 /* Style pour la section jobs */
@@ -296,4 +386,10 @@ p, h1, h2, h3, td, th, span, h2 {
 
 .alert p {
     margin-bottom: 0;
+}
+
+.truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -43,7 +43,7 @@
 </head>
 
 
-<form th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
+<form class="toolbar" th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
     <div>
         <label for="fcategorie">Catégorie:</label>
         <select onchange="submit(this)" th:value="${filterForm.fcategorie}" th:field="${filterForm.fcategorie}" id="fcategorie" name="fcategorie">
@@ -83,7 +83,7 @@
     </div>
 </form>
 <!--good Deals header-->
-<header th:fragment="goodDealsHeader" id="gdTopnav" class="navbar-expand-md"><div class="index-header">
+<header th:fragment="goodDealsHeader" id="gdTopnav" class="navbar-expand-md"><div class="index-header toolbar">
     <form th:if="${searchform}" th:object="${searchform}" class="form-inline my-4" th:action="@{/productliste/search}" method="get">
         <label for="query">
             <form th:if="${searchform}" th:replace="fragments/general.html :: filterform"></form>
@@ -119,12 +119,23 @@
                 <a th:href="@{/productliste}" class="btn btn-primary">Acceuil</a>
             </div>
         </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <a th:href="@{/contacts}" class="btn btn-primary">Acceuil</a>
+            </div>
+        </div>
     </div>
 </header>
 
 <!-- dyshaJos Fragment -->
-<header th:fragment="dyshaJobsHeader">
+<header class="toolbar" th:fragment="dyshaJobsHeader">
     <nav>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <form th:action="@{/dyshajobs/search}" method="get">
             <label for="exprr"></label>
             <input id="exprr" name="exprr" type="text" placeholder="Rechercher un job..." aria-label="Rechercher">
@@ -137,25 +148,23 @@
             <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/dyshajobs/workers}">Liste des employés</a></li>
             <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/dyshajobs/dyshaPostulats}">Les Postulat</a></li>
             <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/dyshajobs/createDyshaJob}">Nouveau Job</a></li><! if role == admin>
+            <li><a th:href="@{/contacts}">Contacts</a></li>
             <li th:if="${!globalUser.dyshaUserExist}"><a href="#" th:href="@{/dyshajobs/newdyshaworker}">Ajouter une description</a></li>
             <li>
-             <form method="post" th:action="@{/logout}">
-                <input type="hidden" name="_csrf" value="<csrf_token_value>"/>
-                <button type="submit">Logout</button>
-             </form>
+                <form method="post" th:action="@{/logout}">
+                    <input type="hidden" name="_csrf" value="<csrf_token_value>"/>
+                    <button type="submit">Logout</button>
+                </form>
             </li>
-             <!--TODO: implementataion; load information profil in combination withh Dysha Jobs-->
-            <!--fragment de footer et de barre 'doutil a ajouter sur toutes les pages Dysha-Job-->
-            <li th:if="${globalUser.dyshaUserExist}"><a href="#" th:href="@{/dyshajobs/dyshaprofil}">
-                <div class="profile">
-                    <div class="profile-image">
-                        <img th:src="@{/dysha_files/{fileName}(fileName=${globalUser.worker.encodedImageProfile})}" alt="Photo de profil">
+            <li th:if="${globalUser.dyshaUserExist}">
+                <a href="#" th:href="@{/dyshajobs/dyshaprofil}">
+                    <div class="profile">
+                        <div class="profile-image">
+                            <img th:src="@{/dysha_files/{fileName}(fileName=${globalUser.worker.encodedImageProfile})}" alt="Photo de profil" src="#">
+                        </div>
                     </div>
-                    <div class="profile-name">
-                        <p th:text="${globalUser.user.lastName}"></p>
-                    </div>
-                </div>
-            </a></li>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -170,7 +179,8 @@
                 <li><a th:href="@{/dyshamusicindex}">Accueil</a></li>
                 <li><a href="#">Recherche</a></li>
                 <li><a href="#">Bibliothèque</a></li>
-                <li><a th:href="@{/newdyshamusic/upload}">Ajoueter un tube</a></li>
+                <li><a th:href="@{/newdyshamusic/upload}">Ajoueter un Tube</a></li>
+                <li><a th:href="@{/contacts}">Contacts</a></li>
             </ul>
         </nav>
     </header>
@@ -195,9 +205,9 @@
         <h2 th:text="${titre}">Derniers jobs</h2>
         <div th:each="job : ${jobs}" class="job-image-container">
             <a th:href="@{/dyshajobs/jobdetails/{id}(id=${job.id})}" class="btn btn-primary" th:class="'job-ad'">
-            <img th:src="@{/dysha_files/{fileName}(fileName=${job.images.get(0)})}" class="card-img-top" alt="Product Image" src="#">
+            <img th:src="@{/dysha_files/{fileName}(fileName=${job.images.get(0)})}" alt="Job Image" src="#">
                 <h3 th:text="${job.title} + ' chez ' + ${job.employeur}"></h3>
-                <p th:text="${job.description}"></p>
+                <p class="truncate-text" th:text="${job.description}"></p>
                 <p>Posté le <span th:text="${job.postedDate}"></span> par <span th:text="${job.getEmployeur}"></span> à <span th:text="${job.location}"></span></p>
             </a>
         </div>
@@ -310,16 +320,5 @@
     </div>
 </footer>
 <h3 th:fragment="avis" class="transbox">Un <a th:href="@{/avis}"> Avis</a> de votre part est bien entendu le Bienvenu</h3>
-
 </body>
-<script th:fragment="myFunction-js">
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "navbar-expand") {
-            x.className += "navbar-expand-md";
-        } else {
-            x.className = "navbar-expand";
-        }
-    }
-</script>
 </html>

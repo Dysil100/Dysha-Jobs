@@ -20,16 +20,14 @@ public class UserController {
     ServiceSupreme serviceSupreme;
 
     @GetMapping(USERINDEX)
-    public String userindex(Model model, @ModelAttribute("text") String text) {
-        model.addAttribute("text", text);
-        model.addAttribute("role", "user");
+    public String userindex(Model model, @ModelAttribute("user") AppUser user) {
+        model.addAttribute("user", user);
         return "index";
     }
 
-    @ModelAttribute("text")
-    String handle(Principal user) {
-        AppUser userByEmail = serviceSupreme.getUserByEmail(user.getName());
-        return userByEmail.getFirstName();
+    @ModelAttribute("user")
+    AppUser handle(Principal user) {
+        return serviceSupreme.getUserByEmail(user.getName());
     }
 
     @ModelAttribute("profile")

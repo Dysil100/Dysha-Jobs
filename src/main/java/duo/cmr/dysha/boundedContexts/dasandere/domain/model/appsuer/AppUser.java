@@ -84,4 +84,11 @@ public class AppUser  implements UserDetails  {
     public String getFullName() {
         return firstName + "  " + lastName;
     }
+
+    public boolean isAdmin(){
+        return role.name().equals("ROLE_ADMIN");
+    }
+    public boolean isLeader(){
+        return role.name().equals("ROLE_LEADER");
+    }
 }

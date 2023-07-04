@@ -69,6 +69,19 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 
     @Contract(pure = true)
     private @NotNull String determineDyshaTargetUrl(Authentication authentication) {
-        return "productliste";
+        Map<String, String> roleTargetUrlMap = new HashMap<>(Map.of("ROLE_ADMIN", "/index","ROLE_USER",
+                "/dyshajobs","ROLE_LEADER", "/index")); // Better save the more valuable Authorities
+        // so that the highe authority for a user may be found first
+
+        final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (final GrantedAuthority grantedAuthority : authorities) {
+            String authorityName = grantedAuthority.getAuthority();
+            if (roleTargetUrlMap.containsKey(authorityName)) {
+                return roleTargetUrlMap.get(authorityName);
+            }
+        }
+        throw new IllegalStateException();
     }
+
+
 }

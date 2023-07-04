@@ -2,6 +2,8 @@ package duo.cmr.dysha.boundedContexts.generalweb;
 
 import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUser;
 import duo.cmr.dysha.boundedContexts.dasandere.web.services.ServiceSupreme;
+import lombok.AllArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import static duo.cmr.dysha.boundedContexts.routen.Routen.*;
 
 @Controller
+@AllArgsConstructor
 public class WebSeiteAllgemeinController {
     ServiceSupreme serviceSupreme;
     // TODO: 06.02.22 definiere ein Supreme Service für this.class
@@ -83,4 +86,11 @@ public class WebSeiteAllgemeinController {
         return "telecharger";
     }
     // TODO: 03.02.22 implement all file related to the Web-Site so almost all may be just getMapping;
+
+    @PostMapping("/sendCommentaire")
+    public String sendMail(@RequestParam("comments") String comments) {
+        serviceSupreme.sendMail("dysha237@gmail.com", "Nouveau commentaire depuis le site", comments);
+        // Redirige vers une page de confirmation ou autre
+        return "redirect:/contacts";
+    }
 }

@@ -6,3 +6,13 @@
     const favicon = document.getElementById('favicon');
     favicon.href = url;
 });
+
+    // Afficher ou masquer le menu déroulant en fonction de l'état de la case à cocher
+    document.getElementById("menu-checkbox").addEventListener("change", function() {
+        var menu = this.parentNode.nextSibling;
+        if (this.checked) {
+            menu.style.display = "flex";
+        } else {
+            menu.style.display = "none";
+        }
+    });

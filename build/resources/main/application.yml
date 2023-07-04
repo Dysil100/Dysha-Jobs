@@ -20,6 +20,7 @@ spring:
     url: jdbc:postgresql://localhost:15000/dysha
     user: dysha
     password: iamgroot
+    locations: classpath:db/migration
 
   resources:
     chain:

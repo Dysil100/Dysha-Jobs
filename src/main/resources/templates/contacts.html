@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+  <link rel="stylesheet" th:href="@{/css/contacts.css}" type="text/css" href="../../static/css/contacts.css"/>
+</head>
+<body>
+<div class="container">
+  <h1>Contactez-nous</h1>
+  <ul class="contact-list">
+    <li>
+      <a href="tel:+237671048719">
+        <i class="fas fa-phone"></i>
+        <span>Téléphone</span>
+      </a>
+    </li>
+    <li>
+      <a href="mailto:dysha237@gmail.com">
+        <i class="fas fa-envelope"></i>
+        <span>Email</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://m.facebook.com/people/Dysha-Enterprise/100092696322244">
+        <i class="fab fa-facebook"></i>
+        <span>Facebook</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://instagram.com/dysha__shop01?igshid=YmM0MjE2YWMzOA==">
+        <i class="fab fa-instagram"></i>
+        <span>Instagram</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="https://wa.me/+237671048719">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+    </li>
+    <!--li>
+      <a href="https://www.twitter.com/example">
+        <i class="fab fa-twitter"></i>
+        <span>Twitter</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.tiktok.com/example">
+        <i class="fab fa-tiktok"></i>
+        <span>TikTok</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.linkedin.com/in/example">
+        <i class="fab fa-linkedin"></i>
+        <span>LinkedIn</span>
+      </a>
+    </li-->
+    <!-- Ajoutez d'autres contacts ici -->
+  </ul>
+  <div class="extra-info">
+    <p>Vous pouvez également nous contacter en remplissant le formulaire ci-dessous :</p>
+    <form th:action="@{/sendCommentaire}" method="post">
+      <textarea name="comments" placeholder="Commentaires"></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+  <a th:href="@{index}" class="back-button">Retour</a>
+</div>
+</body>
+</html>

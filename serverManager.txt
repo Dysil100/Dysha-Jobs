@@ -35,7 +35,7 @@ I - App Starten
         oder das Folgende
         java -jar ../Dysha-Jobs/build/libs/Dysha-Jobs-0.0.1-SNAPSHOT.jar  server.port=80
 
-        Laufen lassen: ./gradlew bootRun
+        Laufen lassen: nohup ./gradlew bootRun > bootRun.txt &
             (das obige geht auch statt das jar datei laufen zu lassen)
 
 II - App aktualisieren

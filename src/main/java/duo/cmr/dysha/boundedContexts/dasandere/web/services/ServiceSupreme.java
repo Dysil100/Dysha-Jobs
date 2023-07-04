@@ -7,6 +7,7 @@ import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUser;
 import duo.cmr.dysha.boundedContexts.dasandere.persistence.database.archiv.UserArchivEntity;
 import duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.AppUserService;
 import duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.ConfirmationTokenService;
+import duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class ServiceSupreme {
     private ConfirmationTokenService confirmationTokenService;
     private DiscussionService discussionService;
     private ChatDiscussionHash ch;
+    private EmailService emailService;
     public AppUser getUserByEmail(String email) {
         return (AppUser) appUserService.loadUserByUsername(email);
     }
@@ -68,5 +70,9 @@ public class ServiceSupreme {
 
     public AppUser authenticateUser(String username, String password) {
         return null;
+    }
+
+    public void sendMail(String mail, String subjet, String comments) {
+        emailService.send(mail, comments, subjet);
     }
 }

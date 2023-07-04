@@ -1,5 +1,22 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');*/
 
+/* Pour les écrans plus petits que 600 pixels de large */
+@media screen and (max-width: 600px) {
+    /* Réduire la taille des éléments de la barre d'outils */
+    .toolbar li {
+        font-size: 12px;
+    }
+}
+
+/* Pour les écrans plus grands que 600 pixels de large */
+@media screen and (min-width: 600px) {
+    /* Utiliser une mise en page en ligne pour les éléments de la barre d'outils */
+    .toolbar li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+
 /* CSS pour le style de la page */
 
 /* Réinitialisation des styles par défaut */
