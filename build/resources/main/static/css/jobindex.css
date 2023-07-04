@@ -33,12 +33,12 @@
 }
 
 .toolbar ul li a {
-    color: #333;
+    color: #eefdfd;
     text-decoration: none;
 }
 
 .toolbar ul li a:hover {
-    color: #d7fcf8;
+    color: #00fdde;
 }
 
 @media screen and (max-width: 768px) {
