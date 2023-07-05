@@ -167,6 +167,18 @@
             </li>
         </ul>
     </nav>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.toolbar ul').classList.toggle('open');
+        });
+        fetch('/dysha_files/DyshaJobs_Logo')
+            .then(response => response.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const favicon = document.getElementById('favicon');
+                favicon.href = url;
+            });
+    </script>
 </header>
 
 <div th:fragment="dyshmusicheader">
@@ -183,6 +195,11 @@
                 <li><a th:href="@{/contacts}">Contacts</a></li>
             </ul>
         </nav>
+        <script>
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                document.querySelector('.toolbar ul').classList.toggle('open');
+            });
+        </script>
     </header>
 </div>
 <br>

@@ -41,6 +41,16 @@
     color: #00fdde;
 }
 
+/* Style du menu déroulant */
+nav ul {
+    display: none; /* Masquer le menu par défaut */
+}
+
+nav ul.active {
+    display: block; /* Afficher le menu lorsque la classe 'active' est présente */
+}
+
+
 @media screen and (max-width: 768px) {
     .menu-toggle {
         display: block;
