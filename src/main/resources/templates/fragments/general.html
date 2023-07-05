@@ -171,13 +171,6 @@
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.toolbar ul').classList.toggle('open');
         });
-        fetch('/dysha_files/DyshaJobs_Logo')
-            .then(response => response.blob())
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                const favicon = document.getElementById('favicon');
-                favicon.href = url;
-            });
     </script>
 </header>
 
