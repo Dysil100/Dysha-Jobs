@@ -68,7 +68,12 @@
       <button type="submit">Envoyer</button>
     </form>
   </div>
-  <a th:href="@{index}" class="back-button">Retour</a>
+  <button onclick="goBack()" class="back-button">Retour</button>
 </div>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
 </body>
 </html>
