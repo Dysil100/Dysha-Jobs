@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Part;
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.Deflater;
@@ -52,12 +53,13 @@ public class FileTypeService {
         }
     }
 
-    private  boolean isImage(byte[] fileBytes) {
+    private boolean isImage(byte[] fileBytes) {
         // Formats d'image courants avec leur en-tête correspondant
         Map<String, byte[]> imageFormats = new HashMap<>();
         imageFormats.put("jpg", new byte[]{(byte) 0xFF, (byte) 0xD8, (byte) 0xFF, (byte) 0xE0});
         imageFormats.put("png", new byte[]{(byte) 0x89, 0x50, 0x4E, 0x47});
         imageFormats.put("gif", new byte[]{0x47, 0x49, 0x46, 0x38});
+        imageFormats.put("jpeg", new byte[]{(byte) 0xFF, (byte) 0xD8, (byte) 0xFF, (byte) 0xE0}); // Ajouter cette ligne
 
         // Vérifier l'en-tête du fichier pour les formats d'image
         for (Map.Entry<String, byte[]> entry : imageFormats.entrySet()) {
@@ -68,6 +70,7 @@ public class FileTypeService {
         }
         return false;
     }
+
 
     private  boolean isPdf(byte[] fileBytes) {
         byte[] pdfHeader = new byte[]{0x25, 0x50, 0x44, 0x46}; // En-tête du format PDF

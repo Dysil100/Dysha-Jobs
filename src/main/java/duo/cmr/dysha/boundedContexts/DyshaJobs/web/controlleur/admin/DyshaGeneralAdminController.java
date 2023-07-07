@@ -117,7 +117,7 @@ public class DyshaGeneralAdminController {
             model.addAttribute("dyshaJob", dyshaJob);
             return "dysha_jobs/newdyshajob";
         }
-        List<String> images = dyshaFileService.saveAll(new FileInfos(user.getUser().getId(), user.getUser().getId(), "Product-Service", "image"), jobImages);
+        List<String> images = dyshaFileService.saveAll(new FileInfos(user.getUser().getId(), user.getUser().getId(), dyshaJob.tableName(), "image/*"), jobImages);
         dyshaJob.setUserId(user.getUser().getId());
         dyshaJob.setImages(images);
         dyshaJob.setPostedDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)));

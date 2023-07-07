@@ -54,6 +54,8 @@ public class DyshaFileController {
         if (file.getSize() > 5000000) { // le fichier doit peser environ 0,5 Megga Octet
             result.rejectValue("fileType", "file.type.invalid", "Le fichier doit peser environ 0.5 Megga Octets. <br> Veuillez compresser votre image svp.");
             model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("dyshaFile", dyshaFile);
+
             return "addFiles";
         }
 
@@ -65,6 +67,7 @@ public class DyshaFileController {
         if (!definedFiletype.equalsIgnoreCase(determineFileType)) {
             result.rejectValue("fileType", "file.type.invalid", "Le fichier doit être de type " + definedFiletype);
             model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("dyshaFile", dyshaFile);
             return "addFiles";
         }
 
@@ -88,7 +91,9 @@ public class DyshaFileController {
     @GetMapping("/files/{uniqueName}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String uniqueName) {
+        System.out.println(uniqueName);
         DyshaFile file = dyshaFileService.findByUniqueName(uniqueName);
+        System.out.println(file.getName());
         if (file != null) {
             ByteArrayResource resource = new ByteArrayResource(file.getData());
             return ResponseEntity.ok()

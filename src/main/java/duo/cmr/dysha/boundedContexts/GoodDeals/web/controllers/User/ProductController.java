@@ -35,12 +35,12 @@ public class ProductController {
     }
 
     @GetMapping("/goodeals/profil")
-    public String userprofil(Model model, @ModelAttribute("searchform") InputSearchForm searchForm,  @ModelAttribute("text") String text, @ModelAttribute("user") AppUser currentUser) {
+    public String userprofil(Model model,  @ModelAttribute("text") String text, @ModelAttribute("user") AppUser currentUser) {
         List<Product> allByUserId = productService.findAllByUserId(currentUser.getId());
         System.out.println("Mes produits = " + allByUserId);
         model.addAttribute("myProducts", allByUserId);
         model.addAttribute("profile", currentUser);
-        model.addAttribute("searchform", searchForm);
+        //model.addAttribute("searchform", searchForm);
         return "good-deals/gooddealsprofil";
     }
 

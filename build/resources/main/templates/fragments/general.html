@@ -43,7 +43,7 @@
 </head>
 
 
-<form class="toolbar" th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
+<form th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
     <div>
         <label for="fcategorie">Catégorie:</label>
         <select onchange="submit(this)" th:value="${filterForm.fcategorie}" th:field="${filterForm.fcategorie}" id="fcategorie" name="fcategorie">
@@ -84,36 +84,18 @@
 </form>
 <!--good Deals header-->
 <header th:fragment="goodDealsHeader" id="gdTopnav" class="navbar-expand-md"><div class="index-header toolbar">
+    <div class="index-header toolbar">
+        <div th:if="${filterForm}" class="filter-form">
+            <button class="filter-toggle-btn" onclick="toggleFilterForm()">Filtre</button>
+            <form th:replace="fragments/general.html :: filterform"></form>
+        </div>
     <form th:if="${searchform}" th:object="${searchform}" class="form-inline my-4" th:action="@{/productliste/search}" method="get">
         <label for="query">
-            <form th:if="${searchform}" th:replace="fragments/general.html :: filterform"></form>
             <input th:if="${searchform}" onchange="submit(this)" id="query" class="form-control mr-sm-2" type="search" placeholder="Rechercher un produit" aria-label="Rechercher" th:text="${searchform.query}" th:value="${searchform.query}" name="query">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
         </label>
     </form>
 
-        <!-- bouton pour créer un nouveau produit -->
-
-        <div class="row mb-4">
-            <div class="col">
-                <a th:href="@{/discussions}" class="btn btn-primary">Conversations</a>
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col">
-                <a th:href="@{/productliste/search?query=''}" class="btn btn-primary">rechercher</a>
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col">
-                <a th:href="@{/newproduct}" class="btn btn-primary">NouveauPoduit</a>
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col">
-                <a th:href="@{/goodeals/profil}" class="btn btn-primary">Moi</a>
-            </div>
-        </div>
         <div class="row mb-4">
             <div class="col">
                 <a th:href="@{/productliste}" class="btn btn-primary">Acceuil</a>
@@ -122,10 +104,39 @@
 
         <div class="row mb-4">
             <div class="col">
-                <a th:href="@{/contacts}" class="btn btn-primary">Acceuil</a>
+                <a th:href="@{/discussions}" class="btn btn-primary">Conversations</a>
             </div>
         </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <a th:href="@{/newproduct}" class="btn btn-primary">NouveauPoduit</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <a th:href="@{/goodeals/profil}" class="btn btn-primary">Moi</a>
+            </div>
+        </div>
+        <script>
+            function toggleFilterForm() {
+                var filterForm = document.querySelector('.filter-form form');
+                filterForm.classList.toggle('open');
+            }
+        </script>
+        <!--div class="row mb-4">
+            <div class="col">
+                <a th:href="@{/productliste/search?query=''}" class="btn btn-primary">rechercher</a>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <a th:href="@{/contacts}" class="btn btn-primary">Contact</a>
+            </div>
+        </div-->
     </div>
+</div>
 </header>
 
 <!-- dyshaJos Fragment -->

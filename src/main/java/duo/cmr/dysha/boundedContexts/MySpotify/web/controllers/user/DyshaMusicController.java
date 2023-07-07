@@ -50,8 +50,8 @@ public class DyshaMusicController {
             // Gérer le cas où les fichiers sont manquants
             return "error";
         } try {
-            String musicFileName = dyshaFilesService.save(new FileInfos(user.getId(), user.getId(), "Dysha_Music", "Audio-mp3"), musicFile);
-            String thumbnailFileName = dyshaFilesService.save(new FileInfos(user.getId(), user.getId(), "Music-Thumnail", "Image"), thumbnailFile);
+            String musicFileName = dyshaFilesService.save(new FileInfos(user.getId(), user.getId(), "Dysha_Music", "audio/mp3"), musicFile);
+            String thumbnailFileName = dyshaFilesService.save(new FileInfos(user.getId(), user.getId(), "Music-Thumnail", "image/*"), thumbnailFile);
             DyshaMusic music = new DyshaMusic(musicForm.getTitle(), musicForm.getDescription(), musicFileName, thumbnailFileName, 0L, 0L, LocalDateTime.now(), appUserService.findById(user.getId()));
             musicService.saveMusic(music);
         }
