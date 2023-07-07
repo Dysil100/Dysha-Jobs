@@ -162,6 +162,59 @@ a {
     color: black; /* ou toute autre couleur de texte souhaitée */
 }
 
+.filter-form {
+    position: relative;
+}
+
+.filter-form form {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: none;
+    z-index: 999;
+}
+
+.filter-form form.open {
+    display: block;
+}
+
+.filter-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.filter-form input,
+.filter-form select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.filter-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.filter-form button[type="submit"]:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.filter-form button[type="submit"]:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+
 
 
 
