@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -30,10 +31,41 @@ public class AdminController {
         //return "rootindex";
     }
 
-    @GetMapping(USERLISTE)
+    @GetMapping(AllUSERS)
     public String userliste(Model model, @ModelAttribute("text") String text) {
-        model.addAttribute("alle", serviceSupreme.alleUsersArchiv());
-        return "userliste";
+        model.addAttribute("usersArchiv", serviceSupreme.alleUsersArchiv());
+        model.addAttribute("userList", serviceSupreme.alleAppUsers());
+        return "allUsers";
+    }
+
+    @GetMapping("users/enable/{id}")
+    public String enableUser(@PathVariable Long id) {
+        serviceSupreme.enableUserById(id);
+        return "redirect:/adminindex/users/all";
+    }
+
+    @GetMapping("/users/disable/{id}")
+    public String disableUser(@PathVariable Long id) {
+        serviceSupreme.disableUserById(id);
+        return "redirect:/adminindex/users/all";
+    }
+
+    @GetMapping("/users/block/{id}")
+    public String blockUser(@PathVariable Long id) {
+        serviceSupreme.blockUserById(id);
+        return "redirect:/adminindex/users/all";
+    }
+
+    @GetMapping("/users/deblock/{id}")
+    public String deblockUser(@PathVariable Long id) {
+        serviceSupreme.deBlockUserById(id);
+        return "redirect:/adminindex/users/all";
+    }
+
+    @GetMapping("/users/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        serviceSupreme.deleteUserById(id);
+        return "redirect:/adminindex/users/";
     }
 
 

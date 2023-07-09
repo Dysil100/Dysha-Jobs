@@ -63,6 +63,21 @@ public class AppUserRepositoryImpl implements AppUserRepository {
         return toAppUser(daoAppUserRepository.findById(userId).get());
     }
 
+    @Override
+    public boolean existByEmail(String email) {
+        return daoAppUserRepository.existsByEmail(email);
+    }
+
+    @Override
+    public void blockUserById(Long id) {
+        daoAppUserRepository.blockUserById(id);
+    }
+
+    @Override
+    public void deBlockUserById(Long id) {
+        daoAppUserRepository.deBlockUserById(id);
+    }
+
     private List<AppUser> toAppUserList(Iterable<AppUserEntity> allByIds) {
         List<AppUser> appUsers = new ArrayList<>();
         allByIds.forEach(e -> appUsers.add(toAppUser(e)));
@@ -71,7 +86,7 @@ public class AppUserRepositoryImpl implements AppUserRepository {
     }
 
     public AppUser toAppUser(AppUserEntity entity) {
-        AppUser appUser = new AppUser(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getTelephone(), entity.getPassword(), entity.getRole());
+        AppUser appUser = new AppUser(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getTelephone(), entity.getPassword(), entity.getRole(), entity.getLocked(), entity.getEnabled());
         appUser.setEnabled(entity.getEnabled());
         appUser.setLocked(entity.getLocked());
         return appUser;

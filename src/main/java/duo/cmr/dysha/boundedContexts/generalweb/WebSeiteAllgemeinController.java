@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.security.Principal;
+
 import static duo.cmr.dysha.boundedContexts.routen.Routen.*;
 
 @Controller
@@ -76,21 +78,10 @@ public class WebSeiteAllgemeinController {
         return "redirect:/login";
     }
 
-    @GetMapping(CONTACTS)
-    public String contacts(Model model){
-        return "contacts";
-    }
-
     @GetMapping(TELECHARGER)
     public String telecharger(Model model){
         return "telecharger";
     }
     // TODO: 03.02.22 implement all file related to the Web-Site so almost all may be just getMapping;
 
-    @PostMapping("/sendCommentaire")
-    public String sendMail(@RequestParam("comments") String comments) {
-        serviceSupreme.sendMail("dysha237@gmail.com", "Nouveau commentaire depuis le site", comments);
-        // Redirige vers une page de confirmation ou autre
-        return "redirect:/contacts";
-    }
 }

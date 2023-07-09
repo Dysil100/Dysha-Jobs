@@ -25,14 +25,13 @@ public class RecoveryPasswordController {
     private ServiceSupreme serviceSupreme;
 
     @GetMapping(MAILEINGABE)
-    public String maileingabe(Model model) {
+    public String maileingabeForRecoverypassword(Model model) {
         model.addAttribute("recovery", true);
         return "login";
     }
 
     @PostMapping(MAILEINGABE)
-    public String maileingabePost(Model model, String email) {
-
+    public String maileingabeForRecoverypasswordPost(Model model, String email) {
         model.addAttribute("text", "Notifications: " + registrationService.recoverPassword(email));
         model.addAttribute("notification", true);
         return "login";

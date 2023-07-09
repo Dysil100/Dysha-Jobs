@@ -75,4 +75,28 @@ public class ServiceSupreme {
     public void sendMail(String mail, String subjet, String comments) {
         emailService.send(mail, comments, subjet);
     }
+
+    public void enableUserById(Long id) {
+        AppUser byId = appUserService.findById(id);
+        confirmationTokenService.updateByUsername(byId.getEmail());
+        String token = confirmationTokenService.findByUsername(byId.getEmail()).get().getToken();
+        confirmationTokenService.setConfirmedAt(token);
+        appUserService.enableAppUserById(id);
+    }
+
+    public void disableUserById(Long id) {
+        appUserService.disableAppUserById(id);
+    }
+
+    public void blockUserById(Long id) {
+        appUserService.blockUserById(id);
+    }
+
+    public void deBlockUserById(Long id) {
+        appUserService.deBlockUserById(id);
+    }
+
+    public void deleteUserById(Long id) {
+        appUserService.deleteById(id);
+    }
 }

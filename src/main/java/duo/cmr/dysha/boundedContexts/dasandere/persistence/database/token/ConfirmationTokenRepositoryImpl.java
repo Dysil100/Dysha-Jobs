@@ -40,4 +40,9 @@ public class ConfirmationTokenRepositoryImpl implements ConfirmationTokenReposit
     public void updateByUsername(String newToken, String email) {
         daoConfirmationToken.updateByUsername(newToken, email);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return daoConfirmationToken.existsByUsername(email);
+    }
 }

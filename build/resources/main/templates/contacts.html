@@ -64,12 +64,28 @@
   <div class="extra-info">
     <p>Vous pouvez également nous contacter en remplissant le formulaire ci-dessous :</p>
     <form th:action="@{/sendCommentaire}" method="post">
-      <textarea name="comments" placeholder="Commentaires"></textarea>
+      <textarea name="comment" placeholder="Votre Commentaires"></textarea>
       <button type="submit">Envoyer</button>
     </form>
   </div>
   <button onclick="goBack()" class="back-button">Retour</button>
 </div>
+<div th:if="${user.isAdmin()}">
+<h2>Liste d'avis</h2>
+<!-- Boucle pour afficher chaque avis -->
+<div th:each="avis : ${listeAvis}" class="avis">
+  <div class="titre" th:text="${avis.comment}"></div>
+  <div class="contenu">Téléphone : <span th:text="${avis.telephone}"></span></div>
+  <div class="contenu">Email : <span th:text="${avis.email}"></span></div>
+  <div class="contenu">Généré le : <span th:text="${avis.generatedAt}"></span></div>
+  <div class="actions">
+    <form method="post" th:action="@{/adminindex/avis/delete/{id}(id=${avis.id})}">
+      <button class="btn btn-outline-danger btn-sm fa fa-trash" type="submit"> </button>
+    </form>
+  </div>
+</div>
+</div>
+
 <script>
   function goBack() {
     window.history.back();

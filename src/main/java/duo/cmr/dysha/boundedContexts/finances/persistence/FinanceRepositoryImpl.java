@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.DateTimeHelper.dateToString;
-import static duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.DateTimeHelper.stringToDate;
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.dateToString;
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.stringToDate;
 
 @Repository
 @AllArgsConstructor

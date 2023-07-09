@@ -18,4 +18,6 @@ public interface DaoUserArchivRepository extends CrudRepository<UserArchivEntity
     @Modifying
     @Query("UPDATE archiv  Set password = :archiv  WHERE email = :mail;")
     void updatePasswordByEmail(@Param("archiv")String password, @Param("mail")String email);
+
+    boolean existsByEmail(String email);
 }

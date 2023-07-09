@@ -102,6 +102,7 @@ public class DyshaGeneralAdminController {
 
     @GetMapping("/dyshajobs/createDyshaJob")
     public String showCreateJobForm(@NotNull Model model, @ModelAttribute("globalUser") GlobalAppUser user) {
+        model.addAttribute("newJob", true);
         model.addAttribute("globalUser", user);
         model.addAttribute("dyshaJob", new DyshaJob(null, null, null, null, null, null));
         return "dysha_jobs/newdyshajob";
@@ -122,6 +123,34 @@ public class DyshaGeneralAdminController {
         dyshaJob.setImages(images);
         dyshaJob.setPostedDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
         dyshaJobService.save(dyshaJob);
+        return "redirect:/dyshajobs";
+    }
+
+    @GetMapping("/dyshajobs/updateDyhajob/{jobId}")
+    public String showUpdateJobForm(@NotNull Model model, @ModelAttribute("globalUser") GlobalAppUser user, @PathVariable("jobId") Long jobId) {
+        model.addAttribute("update", true);
+        model.addAttribute("globalUser", user);
+        model.addAttribute("udatedDyshaJob", dyshaJobService.getJobById(jobId));
+        return "dysha_jobs/newdyshajob";
+    }
+    @PostMapping("/dyshajobs/updateDyhajob")
+    public String updateJob(Model model, @ModelAttribute("udatedDyshaJob") DyshaJob dyshaJob, @RequestParam("jobImages") List<MultipartFile> jobImages, @NotNull BindingResult result , @ModelAttribute("globalUser") GlobalAppUser user) {
+        System.out.println(dyshaJob);
+        if (!dyshaJobService.validates(dyshaJob)) {
+            model.addAttribute("udatedDyshaJob", dyshaJob);
+            result.rejectValue("title", "dyshaJob.type.invalid", "Vous avez entré des caractere non authorizé! I don't manage some special caratere. ");
+        }
+        if (result.hasErrors()) {
+            model.addAttribute("udatedDyshaJob", dyshaJob);
+            return "dysha_jobs/newdyshajob";
+        }
+        List<String> images1 = dyshaFileService.saveAll(new FileInfos(user.getUser().getId(), user.getUser().getId(), dyshaJob.tableName(), "image/*"), jobImages);
+        dyshaJob.setUserId(user.getUser().getId());
+        List<String> images = dyshaJob.getImages();
+        images.addAll(images1);
+        dyshaJob.setImages(images);
+        dyshaJob.setPostedDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
+        dyshaJobService.update(dyshaJob);
         return "redirect:/dyshajobs";
     }
 

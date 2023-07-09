@@ -25,17 +25,10 @@ public class AppUser  implements UserDetails  {
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    public AppUser(String firstName, String lastName, String email, String telephone, String password, AppUserRole role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.telephone = telephone;
-        this.password = password;
-        this.role = role;
+    public AppUser() {
+        // Corps du constructeur
     }
-
-    public AppUser(Long id, String firstName, String lastName, String email, String telephone, String password, AppUserRole role) {
-        this.id = id;
+    public AppUser(String firstName, String lastName, String email, String telephone, String password, AppUserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

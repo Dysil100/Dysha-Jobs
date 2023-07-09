@@ -57,6 +57,20 @@ public class RegistrationController {
         return "login";
     }
 
+    @GetMapping("/confirmRegistrationByEmail")
+    public String maileingabeForRegistrationConfirmation(Model model) {
+        model.addAttribute("confirmRegistrationByEmail", true);
+        return "login";
+    }
+
+    @PostMapping("/confirmRegistrationByEmail")
+    public String maileingabeForRegistrationConfirmationPost(Model model, String email) {
+        model.addAttribute("text", "Notifications: " + registrationService.confirmTokenByEmail(email));
+        model.addAttribute("notification", true);
+        return "login";
+    }
+
+
     @ModelAttribute("formular")
     RegistrationRequest request() {
         return new RegistrationRequest(null, null, null, null, null, null);

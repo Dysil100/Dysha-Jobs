@@ -39,4 +39,8 @@ public class DyshaJobService {
     public boolean validates(DyshaJob dyshaJob) {
         return matchValidator.matches(dyshaJob);
     }
+
+    public void update(DyshaJob dyshaJob) {
+        dyshaJobRepository.update(dyshaJob);
+    }
 }

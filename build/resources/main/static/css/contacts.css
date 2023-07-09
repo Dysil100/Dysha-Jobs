@@ -132,3 +132,26 @@ form button:hover {
         width: 100px;
     }
 }
+
+
+.avis {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.avis .titre {
+    font-weight: bold;
+}
+
+.avis .contenu {
+    margin-top: 5px;
+}
+
+.avis .actions {
+    margin-top: 10px;
+}
+
+.avis .actions button {
+    margin-right: 5px;
+}

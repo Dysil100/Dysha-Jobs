@@ -7,28 +7,47 @@ import duo.cmr.dysha.boundedContexts.generalhelpers.generalresearch.MyGeneralSea
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.dateToString;
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.stringToDate;
 
 @AllArgsConstructor
 @Repository
 public class DyshaJobRepositoryImpl implements DyshaJobRepository {
-    DaoDyshaJobRepository dyshaJobRepository;
+    DaoDyshaJobRepository daoDyshaJobRepository;
     DyshaFilesService dyshaFilesService;
     MyGeneralSearcher<DyshaJob> generalSearcher ;
     @Override
     public List<DyshaJob> findAllById(List<Long> jobIds) {
-        return toDyshaJobList(dyshaJobRepository.findAllById(jobIds));
+        return toDyshaJobList(daoDyshaJobRepository.findAllById(jobIds));
     }
 
     @Override
     public void save(DyshaJob dyshaJob) {
-        dyshaJobRepository.save(toDyshaJobEntity(dyshaJob));
+        daoDyshaJobRepository.save(toDyshaJobEntity(dyshaJob));
     }
 
     @Override
     public DyshaJob findByID(Long id) {
-        return toDyshaJob(dyshaJobRepository.findById(id).get());
+        return toDyshaJob(daoDyshaJobRepository.findById(id).get());
+    }
+
+    @Override
+    public void update(DyshaJob dyshaJob) {
+        System.out.println(dyshaJob);
+        DyshaJobEntity jobEntity = toDyshaJobEntity(dyshaJob);
+        List<String> images = jobEntity.getImages();
+        String[] arrayImages = new String[images.size()];
+
+        for (int i = 0; i < images.size(); i++) {
+            arrayImages[i] = images.get(i);
+        }
+        daoDyshaJobRepository.update(jobEntity.getTitle(), jobEntity.getDescription(), jobEntity.getPostedDate(),
+                jobEntity.getEmployeur(), jobEntity.getLocation(), jobEntity.getUserId(), arrayImages, jobEntity.getId());
     }
 
     private DyshaJobEntity toDyshaJobEntity(DyshaJob dj) {
@@ -50,7 +69,7 @@ public class DyshaJobRepositoryImpl implements DyshaJobRepository {
 
     @Override
     public List<DyshaJob> findAll() {
-        return toDyshaJobList(dyshaJobRepository.findAll());
+        return toDyshaJobList(daoDyshaJobRepository.findAll());
     }
 
     private List<DyshaJob> toDyshaJobList(Iterable<DyshaJobEntity> all) {
@@ -60,7 +79,7 @@ public class DyshaJobRepositoryImpl implements DyshaJobRepository {
     }
 
     private DyshaJob toDyshaJob(DyshaJobEntity e) {
-        return new DyshaJob(e.getId(), e.getTitle(), e.getDescription(), e.getPostedDate(), e.getEmployeur(), e.getLocation(), e.getUserId(), e.getImages());
+        return new DyshaJob(e.getId(), e.getTitle(), e.getDescription(), stringToDate(dateToString(e.getPostedDate())), e.getEmployeur(), e.getLocation(), e.getUserId(), e.getImages());
     }
 
 }

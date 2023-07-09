@@ -16,4 +16,6 @@ public interface ConfirmationTokenRepository {
     void deleteByUsername(String email);
 
     void updateByUsername(String newToken, String email);
+
+    boolean existsByEmail(String email);
 }

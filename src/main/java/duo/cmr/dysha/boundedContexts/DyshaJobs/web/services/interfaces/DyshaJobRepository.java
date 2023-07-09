@@ -17,4 +17,5 @@ public interface DyshaJobRepository {
 
     DyshaJob findByID(Long id);
 
+    void update(DyshaJob dyshaJob);
 }

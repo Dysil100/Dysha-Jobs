@@ -19,7 +19,7 @@ public class DyshaJob {
     private String employeur;
     private String location;
     private Long userId;
-    private List<String> images;;
+    private List<String> images;
 
     public DyshaJob(String title, String description, String employeur, String location, Long userId, List<String> images) {
         this.title = title;
@@ -51,7 +51,7 @@ public class DyshaJob {
                 ", employeur='" + employeur + '\'' +
                 ", location='" + location + '\'' +
                 ", userId=" + userId +
-                ", encodedImage='" + images.toString() + '\'' +
+                ", images='" + images.toString() + '\'' +
                 '}';
     }
 }

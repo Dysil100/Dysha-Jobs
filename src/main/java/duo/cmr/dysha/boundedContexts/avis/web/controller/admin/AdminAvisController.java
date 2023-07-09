@@ -28,8 +28,9 @@ public class AdminAvisController {
     @PostMapping(DELETEAVIS)
     public String delete(Model model, @PathVariable("id") Long id) {
         avisService.deleteById(id);
-        model.addAttribute("finances", avisService.alle());
-        return "redirect:" + LEADERROUTE + AVISLISTE;
+        System.out.println(id);
+        model.addAttribute("listeAvis", avisService.alle());
+        return "redirect:" + CONTACTS;
     }
 
     @ModelAttribute("text")

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import static duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.DateTimeHelper.dateToString;
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.dateToString;
 
 
 @Service
@@ -31,7 +31,15 @@ public class ConfirmationTokenService {
     }
 
     public Optional<ConfirmationTokenEntity> findByUsername(String email) {
+        if (!existByEmail(email)) {
+            newTokenForEmail(email);
+            return confirmationTokenRepository.findByUsername(email);
+        }
         return confirmationTokenRepository.findByUsername(email);
+    }
+
+    private boolean existByEmail(String email) {
+        return confirmationTokenRepository.existsByEmail(email);
     }
 
     public void deleteByUsername(String email) {
@@ -42,7 +50,7 @@ public class ConfirmationTokenService {
     /**
      * @param email : generat a new token
      */
-    public void updateTokenFor(String email) {
+    public void newTokenForEmail(String email) {
         deleteByUsername(email);
         ConfirmationTokenEntity token = new ConfirmationTokenEntity(
                 UUID.randomUUID().toString(), dateToString(LocalDateTime.now()),

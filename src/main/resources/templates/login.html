@@ -21,13 +21,29 @@
     <div class="forgot-password">
         <a href="#" th:href="@{/maileingabe}">Forgot password?</a>
         <span>or</span>
-        <a href="#" th:href="@{/registration}">Create an account</a>
+        <a href="#" th:href="@{/registration}">Create an account</a><br>
+        <span>or</span> <a href="#" th:href="@{/confirmRegistrationByEmail}">Activate it here</a>
     </div>
 </div>
 
 <div class="container" th:if="${recovery}" >
     <h2>Email du compte a recuperer</h2>
     <form method="post"  th:action="@{/maileingabe}">
+        <div class="input-group">
+            <input type="email" id="email" name="email" required>
+            <label for="email">Email</label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="forgot-password">
+        <a href="#" th:href="@{/registration}">Nouveau Compte</a>
+        <span>or</span>
+        <a href="#" th:href="@{/login}">Login</a>
+    </div>
+</div>
+<div class="container" th:if="${confirmRegistrationByEmail}" >
+    <h2>Email du compte a recuperer</h2>
+    <form method="post"  th:action="@{/confirmRegistrationByEmail}">
         <div class="input-group">
             <input type="email" id="email" name="email" required>
             <label for="email">Email</label>
@@ -100,7 +116,7 @@
     <br>
     <br>
     <br>
-    <button><a th:href="@{/productliste}">Home</a></button>
+    <button><a th:href="@{/dyshajobs}">Home</a></button>
 </div>
 <script src="js/dyshalogin.js"></script>
 </body>

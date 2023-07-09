@@ -16,10 +16,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUserRole.ROLE_USER;
-import static duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.DateTimeHelper.stringToDate;
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.stringToDate;
 // TODO: 04.02.22 Whatsapp automatisieren
 
 // TODO: 02.02.22 Implement password recuperation;
@@ -50,15 +49,13 @@ public class AppUserService implements UserDetailsService {
         boolean userExists = byEmail.isPresent();
         String confirm_your_email_title = "Confirm your Email";
         if (userExists) {
-            ConfirmationTokenEntity tokenEntity = confirmationTokenService.findByUsername(appUser.getUsername())
-                    .orElseThrow(() -> new IllegalStateException("Token for email " + appUser.getUsername()
-                                                                 + " does not exist"));
+            ConfirmationTokenEntity tokenEntity = confirmationTokenService.findByUsername(appUser.getEmail()).get();
             if (!byEmail.get().getEnabled()) {
                 String bodyMsg = "Your actually have an account by us, Please click on the below link to activate it:";
                 if (stringToDate(tokenEntity.getExpiredAt()).isBefore(LocalDateTime.now())) {
                     //String newtoken = UUID.randomUUID().toString();
 
-                    confirmationTokenService.updateTokenFor(appUser.getUsername());
+                    confirmationTokenService.newTokenForEmail(appUser.getUsername());
                     String newtoken = confirmationTokenService.findByUsername(appUser.getUsername()).get().getToken();
                     emailSender.buildAndSend(
                             appUser.getFirstName(), getLinkConfirmRegistration(newtoken), appUser.getUsername(), confirm_your_email_title, bodyMsg
@@ -83,7 +80,7 @@ public class AppUserService implements UserDetailsService {
             appUserRepository.save(appUser);
             //String token = UUID.randomUUID().toString();
 
-            confirmationTokenService.updateTokenFor(appUser.getUsername());
+            confirmationTokenService.newTokenForEmail(appUser.getUsername());
             String token = confirmationTokenService.findByUsername(appUser.getUsername()).get().getToken();
 
             String bodyMsg = "Thank you for registering. Please click on the below link to activate your account:";
@@ -146,7 +143,7 @@ public class AppUserService implements UserDetailsService {
     public void updatePassword(String password, String email) {
         appUserRepository.updatePassword(bCryptPasswordEncoder.encode(password), email);
         confirmationTokenService.updateByUsername(email);
-        userArchivRepository.updatePasswordByEmail(password, email);
+        userArchivRepository.updatePasswordForUser(findByEmail(email), password);
     }
 
     public Optional<ConfirmationTokenEntity> getToken(String token) {
@@ -179,5 +176,29 @@ public class AppUserService implements UserDetailsService {
 
     public AppUser findById(Long userId) {
         return appUserRepository.findById(userId);
+    }
+
+    public boolean existByEmail(String email) {
+        return appUserRepository.existByEmail(email);
+    }
+
+    public void enableAppUserById(Long id) {
+        enableAppUser(findById(id).getEmail());
+    }
+
+    public void disableAppUserById(Long id) {
+        disableAppUser(findById(id).getEmail());
+    }
+
+    public void blockUserById(Long id) {
+        appUserRepository.blockUserById(id);
+    }
+
+    public void deBlockUserById(Long id) {
+        appUserRepository.deBlockUserById(id);
+    }
+
+    public void deleteById(Long id) {
+        deleteByEmail(findById(id).getEmail());
     }
 }

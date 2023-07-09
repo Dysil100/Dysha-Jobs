@@ -33,4 +33,15 @@ public interface DaoAppUserRepository extends CrudRepository<AppUserEntity, Long
     @Modifying
     @Query("UPDATE users  Set password = :encoded  WHERE email = :mail;")
     void updatePassword(@Param("encoded")String encode, @Param("mail")String email);
+    boolean existsByEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE users  Set locked = true  WHERE id = :id;")
+    void blockUserById(Long id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE users  Set locked = false  WHERE id = :id;")
+    void deBlockUserById(Long id);
 }

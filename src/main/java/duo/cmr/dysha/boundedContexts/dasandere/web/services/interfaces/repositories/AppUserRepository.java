@@ -24,4 +24,9 @@ public interface AppUserRepository {
     List<AppUser> findByIds(List<Long> idsFromHash);
 
     AppUser findById(Long userId);
+
+    boolean existByEmail(String email);
+
+    void blockUserById(Long id);
+   void deBlockUserById(Long id);
 }

@@ -31,4 +31,6 @@ public interface DaoConfirmationToken extends CrudRepository<ConfirmationTokenEn
     @Modifying
     @Query("UPDATE confirmation_token  SET token = :newToken WHERE username = :mail")
     void updateByUsername(@Param("newToken") String newToken, @Param("mail") String email);
+
+    boolean existsByUsername(String email);
 }

@@ -159,6 +159,7 @@
             <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/dyshajobs/workers}">Liste des employés</a></li>
             <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/dyshajobs/dyshaPostulats}">Les Postulat</a></li>
             <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/dyshajobs/createDyshaJob}">Nouveau Job</a></li><! if role == admin>
+            <li th:if="${globalUser.isAdmin()}"><a href="#" th:href="@{/adminindex/users/all}">Userliste</a></li><! if role == admin>
             <li><a th:href="@{/contacts}">Contacts</a></li>
             <li th:if="${!globalUser.dyshaUserExist}"><a href="#" th:href="@{/dyshajobs/newdyshaworker}">Ajouter une description</a></li>
             <li>

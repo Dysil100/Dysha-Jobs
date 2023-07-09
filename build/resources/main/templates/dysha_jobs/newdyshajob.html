@@ -10,31 +10,73 @@
 </head>
 <body>
 <header th:replace="fragments/general.html :: dyshaJobsHeader"></header>
-<h1>Alors, Un nouveau poste DyshaJob a proposer ?</h1>
-<form enctype="multipart/form-data" th:action="@{/dyshajobs/createDyshaJob}" th:object="${dyshaJob}" method="POST">
-    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger"></div>
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" id="title" th:field="*{title}" required />
-    </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" th:field="*{description}" required></textarea>
-    </div>
-    <div class="form-group">
-        <label for="employeur">Employeur:</label>
-        <input type="text" id="employeur" th:field="*{employeur}" required />
-    </div>
-    <div class="form-group">
-        <label for="location">Location:</label>
-        <input type="text" id="location" th:field="*{location}" required />
-    </div>
-    <label for="jobImages">Images:</label>
-    <input required type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="displayImages(event)" enctype="multipart/form-data"><br>
-    <div class="form-group">
-        <button type="submit">Create</button>
-    </div>
-</form>
+
+<div th:if="${newJob}">
+    <h1>Alors, Un nouveau poste DyshaJob a proposer ?</h1>
+    <form enctype="multipart/form-data" th:action="@{/dyshajobs/createDyshaJob}" th:object="${dyshaJob}" method="POST">
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger"></div>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="employeur">Employeur:</label>
+            <input type="text" id="employeur" th:field="*{employeur}" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" th:field="*{location}" required />
+        </div>
+        <label for="jobImages">Images:</label>
+        <input required type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="displayImages(event)" enctype="multipart/form-data"><br>
+        <div class="form-group">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>
+<div th:if="${update}">
+    <h1>En changeans ce job n'oublie pas que certaines personnes avait deja regader donc taches d'eventuellement informer les utilisateurs.</h1>
+    <form enctype="multipart/form-data" th:action="@{/dyshajobs/updateDyhajob}" th:object="${udatedDyshaJob}" method="POST">
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger"></div>
+        <div hidden="hidden" class="form-group">
+            <label for="id">Id:</label>
+            <input type="number" id="id" th:field="*{id}" required />
+        </div>
+        <div hidden="hidden" class="form-group">
+            <label for="images">Images:</label>
+            <input type="text" id="images" th:field="*{images}" required />
+        </div>
+        <div hidden="hidden" class="form-group">
+            <label for="userId">Images:</label>
+            <input type="text" id="userId" th:field="*{userId}" required />
+        </div>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="employeur">Employeur:</label>
+            <input type="text" id="employeur" th:field="*{employeur}" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" th:field="*{location}" required />
+        </div>
+        <label for="jobImages">Images:</label>
+        <input type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="displayImages(event)" enctype="multipart/form-data"><br>
+        <div class="form-group">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>
 <footer th:replace="fragments/general.html :: dyshaJobsFooter"></footer>
 </body>
 </html>

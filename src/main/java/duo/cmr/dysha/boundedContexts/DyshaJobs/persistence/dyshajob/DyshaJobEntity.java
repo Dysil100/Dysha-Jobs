@@ -22,7 +22,7 @@ public class DyshaJobEntity {
     private LocalDateTime postedDate;
     private String employeur;
     private String location;
-    public Long userId;
+    private Long userId;
     private List<String> images;
 
     public DyshaJobEntity(String title, String description, LocalDateTime postedDate, String employeur, String location, Long userId, List<String> images) {

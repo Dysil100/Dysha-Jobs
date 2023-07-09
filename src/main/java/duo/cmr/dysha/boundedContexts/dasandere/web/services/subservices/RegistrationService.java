@@ -5,7 +5,6 @@ import duo.cmr.dysha.boundedContexts.dasandere.domain.model.RegistrationRequest;
 import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUser;
 import duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUserRole;
 import duo.cmr.dysha.boundedContexts.dasandere.persistence.database.token.ConfirmationTokenEntity;
-import duo.cmr.dysha.boundedContexts.generalhelpers.generalresearch.MyGeneralSearcher;
 import duo.cmr.dysha.boundedContexts.generalhelpers.matchers.MyMatchValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static duo.cmr.dysha.boundedContexts.dasandere.domain.model.appsuer.AppUserRole.*;
-import static duo.cmr.dysha.boundedContexts.dasandere.web.services.subservices.DateTimeHelper.stringToDate;
+import static duo.cmr.dysha.boundedContexts.generalhelpers.DateTimeHelper.stringToDate;
 
 @Service
 @AllArgsConstructor
@@ -85,5 +84,10 @@ public class RegistrationService {
 
     public boolean validateForm(RegistrationRequest request) {
         return matchValidator.matches(request);
+    }
+
+    public String confirmTokenByEmail(String email) {
+
+        return (appUserService.existByEmail(email)) ? appUserService.signUpUser((AppUser) appUserService.loadUserByUsername(email)) : "User with E-mail: " + email + " doesn't exist. Considere to register";
     }
 }

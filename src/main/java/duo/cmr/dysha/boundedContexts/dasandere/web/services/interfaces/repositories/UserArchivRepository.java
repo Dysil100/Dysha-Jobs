@@ -10,5 +10,7 @@ public interface UserArchivRepository {
 
     List<UserArchivEntity> findAll();
 
-    void updatePasswordByEmail(String password, String email);
+    void updatePasswordForUser(String password, String email);
+
+    void updatePasswordForUser(AppUser byEmail, String password);
 }

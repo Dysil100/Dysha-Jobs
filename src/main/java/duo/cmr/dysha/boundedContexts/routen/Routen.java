@@ -33,7 +33,7 @@ public class Routen {
 
     public static final String USERINDEX = "/index";
 
-    public static final String USERLISTE = "/userliste";
+    public static final String AllUSERS = "/users/all";
 
     public static final String NOTIFICATIONS = "/notifications";
 

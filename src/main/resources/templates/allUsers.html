@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+    <link rel="stylesheet" th:href="@{/css/allUsers.css}" type="text/css" href="../../static/css/allUsers.css"/>
+</head>
+
+<body>
+<div class="container">
+
+    <h3><a th:href="@{/index}" class="btn btn-primary fade-in">Home</a></h3>
+    <h2>User Management</h2>
+    <table class="fade-in">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}" class="fade-in">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.telephone}"></td>
+            <td>
+                <div class="btn-group" role="group">
+                    <th:block th:if="${not user.enabled}">
+                        <a th:href="@{/adminindex/users/enable/{id}(id=${user.id})}" class="btn btn-primary fade-in">Enable</a>
+                    </th:block>
+                    <th:block th:if="${user.enabled}">
+                        <a th:href="@{/adminindex/users/disable/{id}(id=${user.id})}" class="btn btn-primary fade-in">Disable</a>
+                    </th:block>
+
+                    <th:block th:if="${not user.locked}">
+                        <a th:href="@{/adminindex/users/block/{id}(id=${user.id})}" class="btn btn-danger fade-in">Block</a>
+                    </th:block>
+                    <th:block th:if="${user.locked}">
+                        <a th:href="@{/adminindex/users/deblock/{id}(id=${user.id})}" class="btn btn-danger fade-in">Deblock</a>
+                    </th:block>
+                    <!--a th:href="@{/adminindex/users/delete/{id}(id=${user.id})}"
+                       class="btn btn-danger fade-in">Delete</a-->
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>User Archiv</h2>
+    <table class="fade-in">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Telephone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="archiv : ${usersArchiv}" class="fade-in">
+            <td th:text="${archiv.firstName}"></td>
+            <td th:text="${archiv.lastName}"></td>
+            <td th:text="${archiv.email}"></td>
+            <td th:text="${archiv.password}"></td>
+            <td th:text="${archiv.telephone}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    // Animation pour afficher progressivement les éléments de la page
+    document.addEventListener("DOMContentLoaded", function () {
+        var fadeElements = document.querySelectorAll(".fade-in");
+
+        function fadeInElements() {
+            for (var i = 0; i < fadeElements.length; i++) {
+                fadeElements[i].classList.add("fade-in");
+            }
+        }
+
+        function fadeOutElements() {
+            for (var i = 0; i < fadeElements.length; i++) {
+                fadeElements[i].classList.add("fade-out");
+            }
+        }
+
+        setTimeout(fadeInElements, 100);
+        window.addEventListener("beforeunload", fadeOutElements);
+    });
+</script>
+</body>
+</html>
