@@ -76,7 +76,6 @@ public class DyshaMusicController {
     }
     @GetMapping("/getmusic/{musicId}")
     public String playMusic(@PathVariable Long musicId, Model model, @ModelAttribute("user") AppUser user) {
-        System.out.println("hi");
         return "redirect:dyshamusic/" + musicService.findById(musicId).getMusicFileName();
     }
 

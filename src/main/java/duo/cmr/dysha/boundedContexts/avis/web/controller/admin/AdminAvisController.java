@@ -28,7 +28,6 @@ public class AdminAvisController {
     @PostMapping(DELETEAVIS)
     public String delete(Model model, @PathVariable("id") Long id) {
         avisService.deleteById(id);
-        System.out.println(id);
         model.addAttribute("listeAvis", avisService.alle());
         return "redirect:" + CONTACTS;
     }

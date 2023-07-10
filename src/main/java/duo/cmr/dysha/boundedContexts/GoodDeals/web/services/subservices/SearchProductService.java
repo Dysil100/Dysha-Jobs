@@ -13,7 +13,7 @@ public class SearchProductService {
 
     public SearcedListResult searchProductsByExpr(List<Product> all, String query, FilterForm filterForm) {
         //retourner tous les produits si les ya aucune query particuliere de recherche
-        if (query.isBlank()) return new SearcedListResult(new ArrayList<>(), filterProducts(filterForm,all));
+        if (null == query || query.isBlank()) return new SearcedListResult(new ArrayList<>(), filterProducts(filterForm,all));
 
         Map<Product, Integer> scores = new HashMap<>(); // stocker le score pour chaque produit
         List<Product> restList = new ArrayList<>();

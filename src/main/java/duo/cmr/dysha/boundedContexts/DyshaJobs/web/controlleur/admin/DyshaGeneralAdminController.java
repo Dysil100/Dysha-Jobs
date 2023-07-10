@@ -135,7 +135,6 @@ public class DyshaGeneralAdminController {
     }
     @PostMapping("/dyshajobs/updateDyhajob")
     public String updateJob(Model model, @ModelAttribute("udatedDyshaJob") DyshaJob dyshaJob, @RequestParam("jobImages") List<MultipartFile> jobImages, @NotNull BindingResult result , @ModelAttribute("globalUser") GlobalAppUser user) {
-        System.out.println(dyshaJob);
         if (!dyshaJobService.validates(dyshaJob)) {
             model.addAttribute("udatedDyshaJob", dyshaJob);
             result.rejectValue("title", "dyshaJob.type.invalid", "Vous avez entré des caractere non authorizé! I don't manage some special caratere. ");

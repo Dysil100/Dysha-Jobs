@@ -37,7 +37,6 @@ public class ProductController {
     @GetMapping("/goodeals/profil")
     public String userprofil(Model model,  @ModelAttribute("text") String text, @ModelAttribute("user") AppUser currentUser) {
         List<Product> allByUserId = productService.findAllByUserId(currentUser.getId());
-        System.out.println("Mes produits = " + allByUserId);
         model.addAttribute("myProducts", allByUserId);
         model.addAttribute("profile", currentUser);
         //model.addAttribute("searchform", searchForm);
@@ -62,7 +61,6 @@ public class ProductController {
         model.addAttribute("regions", productService.getRegions());
         model.addAttribute("searchform", searchForm);
         model.addAttribute("searchedResult", productService.seachByExpr(searchForm.getQuery(), filterForm));
-
         return "good-deals/productsearchliste";
     }
 
@@ -109,7 +107,7 @@ public class ProductController {
 
     @ModelAttribute("InputSearchForm")
     InputSearchForm inputSearchForm() {
-        return new InputSearchForm(null);
+        return new InputSearchForm("");
     }
 
     @ModelAttribute("user")

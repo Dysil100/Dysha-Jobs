@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:animation="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:animation="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,21 +43,21 @@
 </head>
 
 
-<form th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
+<div th:if="${filterForm}" th:fragment="filterform" th:object="${filterForm}" method="get">
     <div>
         <label for="fcategorie">Catégorie:</label>
-        <select onchange="submit(this)" th:value="${filterForm.fcategorie}" th:field="${filterForm.fcategorie}" id="fcategorie" name="fcategorie">
+        <select onchange="this.form.submit()" th:value="${filterForm.fcategorie}" th:field="${filterForm.fcategorie}" id="fcategorie" name="fcategorie">
             <option value="">Toutes les catégories</option>
             <option th:each="categorie : ${categories}" th:value="${categorie}" th:text="${categorie}"></option>
         </select>
     </div>
     <div>
         <label for="prixMin">Prix minimum:</label>
-        <input onchange="submit(this)" th:field="${filterForm.prixMin}" type="number" id="prixMin" name="prixMin" step="0.01">
+        <input onchange="this.form.submit()" th:field="${filterForm.prixMin}" type="number" id="prixMin" name="prixMin" step="0.01">
     </div>
     <div>
         <label for="prixMax">Prix maximum:</label>
-        <input onchange="submit(this)" th:field="${filterForm.prixMax}" th:value="${filterForm.prixMax}" type="number" id="prixMax" name="prixMax" step="0.01">
+        <input onchange="this.form.submit()" th:field="${filterForm.prixMax}" th:value="${filterForm.prixMax}" type="number" id="prixMax" name="prixMax" step="0.01">
     </div>
 
     <div>
@@ -70,31 +70,33 @@
 
     <div>
         <label for="fville">Ville:</label>
-        <select th:field="${filterForm.fville}" th:value="${filterForm.fville}" type="text" id="fville" name="fville" >
+        <select onchange="this.form.submit()" th:field="${filterForm.fville}" th:value="${filterForm.fville}" type="text" id="fville" name="fville" >
             <option th:selected="${filterForm.fville}" th:value="${filterForm.fville}"></option>
         </select>
     </div>
     <div>
         <label for="fvente">Vente:</label>
-        <select onchange="submit(this)" th:field="${filterForm.fvente}"  th:value="${filterForm.fvente}" type="checkbox" id="fvente" name="fvente">
+        <select onchange="this.form.submit()" th:field="${filterForm.fvente}"  th:value="${filterForm.fvente}" type="checkbox" id="fvente" name="fvente">
             <option value="true">Offre</option>
             <option value="false">Demande</option>
         </select>
     </div>
-</form>
+</div>
 <!--good Deals header-->
-<header th:fragment="goodDealsHeader" id="gdTopnav" class="navbar-expand-md"><div class="index-header toolbar">
+<header th:fragment="goodDealsHeader" id="gdTopnav" class="navbar-expand-md">
     <div class="index-header toolbar">
-        <div th:if="${filterForm}" class="filter-form">
-            <button class="filter-toggle-btn" onclick="toggleFilterForm()">Filtre</button>
-            <form th:replace="fragments/general.html :: filterform"></form>
-        </div>
-    <form th:if="${searchform}" th:object="${searchform}" class="form-inline my-4" th:action="@{/productliste/search}" method="get">
-        <label for="query">
-            <input th:if="${searchform}" onchange="submit(this)" id="query" class="form-control mr-sm-2" type="search" placeholder="Rechercher un produit" aria-label="Rechercher" th:text="${searchform.query}" th:value="${searchform.query}" name="query">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-        </label>
-    </form>
+    <form th:action="@{/productliste/search}" method="get">
+        <div class="index-header toolbar">
+            <div th:if="${filterForm}" class="filter-form">
+                <button class="filter-toggle-btn" onclick="toggleFilterForm()">Filtre</button>
+                <div th:replace="fragments/general.html :: filterform"></div>
+            </div>
+        <form th:if="${searchform}" th:object="${searchform}" class="form-inline my-4">
+            <label for="query">
+                <input th:if="${searchform}" onchange="submit(this)" id="query" class="form-control mr-sm-2" type="search" placeholder="Rechercher un produit" aria-label="Rechercher" th:value="${searchform.query}" name="query">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+            </label>
+        </form>
 
         <div class="row mb-4">
             <div class="col">
@@ -136,7 +138,8 @@
             </div>
         </div-->
     </div>
-</div>
+    </form>
+    </div>
 </header>
 
 <!-- dyshaJos Fragment -->

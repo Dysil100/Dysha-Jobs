@@ -41,7 +41,6 @@ public class ChatController {
     @GetMapping("/messages/{sender}/{receiver}")
     @ResponseBody
     public List<ChatMessage> messages(@PathVariable("receiver") String sender, @PathVariable("sender") String receiver) {
-        System.out.println("Sender = " + sender);
         return chatMessageService.findBySenderAndReceiver(sender, receiver);
     }
 }

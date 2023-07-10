@@ -37,7 +37,6 @@ public class DyshaMusicRepositoryImpl implements DyshaMusicRepository {
 
     @Override
     public DyshaMusic findByMusicName(String filename) {
-        System.out.println(filename);
         return toDyshaMusic(daoDyhsaMusicRepository.findByMusicFileName(filename));
     }
 

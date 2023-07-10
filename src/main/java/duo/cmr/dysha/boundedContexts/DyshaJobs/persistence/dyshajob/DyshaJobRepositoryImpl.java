@@ -38,7 +38,6 @@ public class DyshaJobRepositoryImpl implements DyshaJobRepository {
 
     @Override
     public void update(DyshaJob dyshaJob) {
-        System.out.println(dyshaJob);
         DyshaJobEntity jobEntity = toDyshaJobEntity(dyshaJob);
         List<String> images = jobEntity.getImages();
         String[] arrayImages = new String[images.size()];
@@ -47,7 +46,7 @@ public class DyshaJobRepositoryImpl implements DyshaJobRepository {
             arrayImages[i] = images.get(i);
         }
         daoDyshaJobRepository.update(jobEntity.getTitle(), jobEntity.getDescription(), jobEntity.getPostedDate(),
-                jobEntity.getEmployeur(), jobEntity.getLocation(), jobEntity.getUserId(), arrayImages, jobEntity.getId());
+                jobEntity.getEmployeur(), jobEntity.getLocation(), jobEntity.getUserId(), arrayImages, dyshaJob.getId());
     }
 
     private DyshaJobEntity toDyshaJobEntity(DyshaJob dj) {

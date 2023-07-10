@@ -91,9 +91,7 @@ public class DyshaFileController {
     @GetMapping("/files/{uniqueName}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String uniqueName) {
-        System.out.println(uniqueName);
         DyshaFile file = dyshaFileService.findByUniqueName(uniqueName);
-        System.out.println(file.getName());
         if (file != null) {
             ByteArrayResource resource = new ByteArrayResource(file.getData());
             return ResponseEntity.ok()
