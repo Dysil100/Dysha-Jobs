@@ -60,6 +60,7 @@ public class RegistrationController {
     @GetMapping("/confirmRegistrationByEmail")
     public String maileingabeForRegistrationConfirmation(Model model) {
         model.addAttribute("confirmRegistrationByEmail", true);
+        model.addAttribute("login", false);
         return "login";
     }
 

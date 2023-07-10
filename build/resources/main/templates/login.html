@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container" th:if="${confirmRegistrationByEmail}" >
-    <h2>Email du compte a recuperer</h2>
+    <h2>Email du compte a activer</h2>
     <form method="post"  th:action="@{/confirmRegistrationByEmail}">
         <div class="input-group">
             <input type="email" id="email" name="email" required>
