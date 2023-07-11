@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 public class CustomExceptionHandler {
 
     // TODO: 19.05.2023 comment on this class for production
-    /*@ExceptionHandler(NoSuchElementException.class)
+    @ExceptionHandler(NoSuchElementException.class)
     public ModelAndView handleNoSuchElementException(NoSuchElementException ex) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage("...Mdr! Cet Element nexiste pas.");
@@ -207,6 +207,6 @@ public class CustomExceptionHandler {
         modelAndView.addObject("errorResponse", errorResponse);
 
         return modelAndView;
-    }*/
+    }
 }
 

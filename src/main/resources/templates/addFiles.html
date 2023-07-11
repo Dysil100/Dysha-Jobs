@@ -38,7 +38,7 @@
         <!-- ID de l'entité -->
             <div th:unless="${globalUser.isAdmin}">
                 <label hidden for="entityId"></label>
-                <input  hidden th:value="${dyshaFile.entityId}" type="number" id="entityId" name="entityId"/>
+                <input  hidden th:value="${dyshaFile.forUserId}" type="number" id="entityId" name="entityId"/>
 
                 <label hidden for="fileType"></label>
                 <input hidden th:value="${dyshaFile.fileType}"  type="text" id="fileType" name="fileType"/>
