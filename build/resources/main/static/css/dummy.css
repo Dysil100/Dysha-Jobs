@@ -1,0 +1,108 @@
+/* Fichier style.css */
+
+/* Couleur principale */
+:root {
+    --primary-color: #007bff;
+}
+
+/* Styles généraux pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* En-tête de page */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+/* Styles pour les tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Styles pour les boutons */
+button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour les liens */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styles pour les formulaires */
+form {
+    margin-bottom: 16px;
+}
+
+input, select, textarea {
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles pour les images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styles pour les sections */
+.section {
+    padding: 16px;
+    background-color: #f9f9f9;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Styles pour les colonnes */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.col {
+    float: left;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .col-md-6 {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .col-lg-4 {
+        width: 33.33333%;
+    }
+}

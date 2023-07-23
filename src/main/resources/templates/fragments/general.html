@@ -189,6 +189,43 @@
     </script>
 </header>
 
+
+<header class="toolbar" th:fragment="projetParoissial">
+    <nav>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <form method="get">
+            <label for="exprr"></label>
+            <input id="exprr" name="exprr" type="text" placeholder="Recherche générale (non disponible)" aria-label="Rechercher">
+            <button type="submit">Rechercher</button>
+        </form>
+        <ul>
+            <li><a href="#" th:href="@{/paroisse/dashboard}">Accueil</a></li>
+            <li><a href="#" th:href="@{/paroisse/donations}">Donations à validé</a></li>
+            <li><a href="#" th:href="@{/paroisse/donateurs}">Liste des Donateurs</a></li>
+            <li><a onclick="return false;" href="#" th:href="@{/paroisse/quete}">Quete</a></li>
+            <li><a onclick="return false;" href="#" th:href="@{/paroisse/archives-paroissiale}">Archives Paroissiales</a></li>
+            <li><a onclick="return false;" href="#" th:href="@{/paroisse/mouvement}">Mouvement et groupes</a></li>
+            <li><a onclick="return false;" href="#" th:href="@{/paroisse/Evenement}">Evenement</a></li><! if role == admin>
+            <li><a onclick="return false;" href="#" th:href="@{/paroisse/genese}">Genese de la paroisse</a></li><! if role == admin>
+            <li>
+                <form method="post" th:action="@{/logout}">
+                    <input type="hidden" name="_csrf" value="<csrf_token_value>"/>
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.toolbar ul').classList.toggle('open');
+        });
+    </script>
+</header>
+
 <div th:fragment="dyshmusicheader">
     <header>
         <div class="logo">

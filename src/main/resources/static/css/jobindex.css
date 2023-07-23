@@ -1,3 +1,25 @@
+/* Intro paroissial.css */
+.intro-animation {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 3s ease, transform 3s ease;
+}
+
+/* jobindex.css */
+.intro-animation {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 3s ease, transform 3s ease;
+}
+
+/* Définissez les classes de l'animation */
+.animate-intro {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
 .toolbar {
     background-color: #f1f1f1;
     padding: 10px;

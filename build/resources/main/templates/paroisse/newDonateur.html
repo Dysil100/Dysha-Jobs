@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/dummy.css}" type="text/css" href="../../static/css/dummy.css"/>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+  <title>Ajouter un donateur</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: projetParoissial"></header>
+
+<h1>Ajouter un donateur</h1>
+<form th:action="@{/paroisse/sauvegarder-donateur}" method="post" enctype="multipart/form-data">
+  <input type="text" name="nom" placeholder="Nom">
+  <input type="text" name="prenom" placeholder="Prénom">
+  <label>Sexe:</label>
+  <select name="sexe" id="sexe">
+    <option value="M">Masculin</option>
+    <option value="F">Feminin</option>
+  </select>
+  <input type="checkbox" name="croyant" placeholder="croyant">
+  <input type="checkbox" name="visiteur" placeholder="visiteur">
+  <input type="text" name="adresse_telephonique" placeholder="Adresse téléphonique">
+  <input type="text" name="institution" placeholder="Institution">
+  <input type="file" id="photoDonateur" name="photoDonateur" accept="image/*" enctype="multipart/form-data">
+
+  <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

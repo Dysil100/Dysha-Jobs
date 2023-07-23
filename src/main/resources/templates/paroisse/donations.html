@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/dummy.css}" type="text/css" href="../../static/css/dummy.css"/>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+  <title>Visualisation de toutes les donations non valide</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: projetParoissial"></header>
+
+<h1>Visualisation de toutes les donations</h1>
+<div>
+  <!-- Barre de recherche -->
+  <label>
+    <input name="donation-querry" type="text" placeholder="Rechercher une donation">
+  </label>
+  <!-- Icône pour ajouter une donation -->
+  <a class="fas fa-plus-circle" th:href="@{/paroisse/ajouter-donation}"><span>Nouvelle donation</span></a>
+</div>
+<table>
+  <tr>
+    <th>Details du donateur</th>
+    <th>Type</th>
+    <th>Catégorie</th>
+    <th>Montant</th>
+    <th>Description</th>
+    <th>Date Donation</th>
+    <th>Modifier</th>
+    <th>Details</th>
+    <th>Supprimer</th>
+    <th>Valider</th>
+  </tr>
+  <!-- Boucle pour afficher les détails de chaque donation -->
+  <tr th:each="donation : ${donations}">
+    <td><a th:href="@{|/paroisse/donateurs/${donation.id_donneur}|}">Donateur</a> </td>
+    <td th:text="${donation.type}"></td>
+    <td th:text="${donation.categorie}"></td>
+    <td th:text="${donation.montant}"></td>
+    <td th:text="${donation.description}"></td>
+    <td th:text="${donation.date_donation}"></td>
+    <td><a onclick="return false;" th:href="@{/paroisse/modifier-donation(id_donation=${donation.id_donation})}">Modifier</a></td>
+    <td><a th:href="@{/paroisse/details-donation(id_donation=${donation.id_donation})}">Détail</a></td>
+    <td><a th:href="@{/paroisse/supprimer-donation(id_donation=${donation.id_donation})}">Supprimer</a></td>
+    <td><a th:href="@{/paroisse/valider-donation(id_donation=${donation.id_donation})}">Valider</a></td>
+  </tr>
+</table>
+</body>
+</html>

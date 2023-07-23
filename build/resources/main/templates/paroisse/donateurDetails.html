@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+  <link rel="stylesheet" th:href="@{/css/dummy.css}" type="text/css" href="../../static/css/dummy.css"/>
+  <title>Détails du donateur</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: projetParoissial"></header>
+
+<h1>Détails du donateur</h1>
+<h2>Nom : <span th:text="${donateur.nom}"></span></h2>
+<h2>Prénom : <span th:text="${donateur.prenom}"></span></h2>
+<h2>Sexe : <span th:text="${donateur.sexe}"></span></h2>
+<h2>Adresse Téléphonique : <span th:text="${donateur.adresse_telephonique}"></span></h2>
+<h2>Est croyant : <span th:text="${donateur.croyant}"></span></h2>
+<h2>Est visiteur : <span th:text="${donateur.visiteur}"></span></h2>
+<h2>Institution : <span th:text="${donateur.institution}"></span></h2>
+<h2>Liste des donations :</h2>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Catégorie</th>
+    <th>Montant</th>
+    <th>Description</th>
+    <th>Date Donation</th>
+  </tr>
+  <!-- Boucle pour afficher les détails de chaque donation du donateur -->
+  <tr th:each="donation : ${donateur.donations}">
+    <td th:text="${donation.type}"></td>
+    <td th:text="${donation.categorie}"></td>
+    <td th:text="${donation.montant}"></td>
+    <td th:text="${donation.description}"></td>
+    <td th:text="${donation.date_donation}"></td>
+  </tr>
+</table>
+</body>
+</html>

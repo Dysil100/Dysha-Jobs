@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/dummy.css}" type="text/css" href="../../static/css/dummy.css"/>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+  <title>Liste des donateurs</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: projetParoissial"></header>
+
+<h1>Liste des donateurs</h1>
+<table>
+  <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Sexe</th>
+    <th>Adresse Téléphonique</th>
+    <th>Est croyant</th>
+    <th>Est visiteur</th>
+    <th>Institution</th>
+    <th>Actions</th>
+  </tr>
+  <!-- Boucle pour afficher les détails de chaque donateur -->
+  <tr th:each="donateur : ${donateurs}">
+    <td th:text="${donateur.nom}"></td>
+    <td th:text="${donateur.prenom}"></td>
+    <td th:text="${donateur.sexe}"></td>
+    <td th:text="${donateur.adresse_telephonique}"></td>
+    <td th:text="${donateur.croyant}"></td>
+    <td th:text="${donateur.visiteur}"></td>
+    <td th:text="${donateur.institution}"></td>
+    <td><a th:href="@{|/paroisse/donateurs/${donateur.id_donneur}|}">Voir détails</a></td>
+  </tr>
+</table>
+</body>
+</html>

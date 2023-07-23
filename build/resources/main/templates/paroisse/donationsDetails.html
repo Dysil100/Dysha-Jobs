@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/dummy.css}" type="text/css" href="../../static/css/dummy.css"/>
+  <link rel="stylesheet" th:href="@{/css/jobindex.css}" type="text/css" href="../../static/css/jobindex.css"/>
+  <title>Détails de la donation</title>
+</head>
+<body>
+<header th:replace="fragments/general.html :: projetParoissial"></header>
+
+<h1>Détails de la donation</h1>
+<!--p><strong>Nom du donateur:</strong> <span th:text="${donation.donneur.nom + ' ' + donation.donneur.prenom}"></span></p-->
+<p><strong>Type:</strong> <span th:text="${donation.type}"></span></p>
+<p><strong>Catégorie:</strong> <span th:text="${donation.categorie}"></span></p>
+<p><strong>Montant:</strong> <span th:text="${donation.montant}"></span></p>
+<p><strong>Description:</strong> <span th:text="${donation.description}"></span></p>
+<p><strong>Date de donation:</strong> <span th:text="${donation.date_donation}"></span></p>
+<!-- Vous pouvez afficher d'autres détails de la donation ici -->
+</body>
+</html>

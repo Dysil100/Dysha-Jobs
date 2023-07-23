@@ -14,14 +14,20 @@
             <p> Site d'annonce de petit Jobs et services</p>
         </a>
         </li>
-        <li th:if="${user.isAdmin() || user.isLeader()}" ><a th:href="@{/productliste}">
-            <p>Site de vente produits et services</p></a></li>
-        <li th:if="${user.isAdmin()}"><a th:href="@{/dyshamusicindex}">
+        <li th:if="${user.isAdmin() || user.isLeader()}"><a th:href="@{/productliste}">
+            <p>Site de vente produits et services</p>
+        </a></li>
+
+        <li th:if="${user.isAdmin()|| user.isLeader()}"><a th:href="@{/paroisse/dashboard}">
+            <p>Projet-paroissial</p>
+        </a></li>
+
+        <li th:if="${user.isAdmin()|| user.isLeader()}"><a th:href="@{/dyshamusicindex}">
             <p> Ecoutez et televerser vos music su r Dysha Music</p>
         </a></li>
     </ul>
     <div class="callout-info transbox">
-        <h3> Le site est Pour le moment en evolution.N'hesitez pas a nous <a th:href="@{/contacts}">le signaler</a>  en cas d'erreur, ou de proposition d'amelioration sur le site Nous vous remercions de votre Comprehension</h3>
+        <h3> Les sites sont Pour le moment en evolution.N'hesitez pas a nous <a th:href="@{/contacts}">le signaler</a>  en cas d'erreur, ou de proposition d'amelioration sur le site Nous vous remercions de votre Comprehension</h3>
     </div>
 </div>
 </body>
